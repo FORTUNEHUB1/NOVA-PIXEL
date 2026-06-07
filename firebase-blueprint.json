@@ -1,0 +1,30 @@
+{
+  "entities": {
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "A single blog post entry",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the blog post" },
+        "excerpt": { "type": "string", "description": "A short summary of the blog post" },
+        "content": { "type": "string", "description": "The full HTML or Markdown content of the blog post" },
+        "authorName": { "type": "string", "description": "The name of the author" },
+        "authorId": { "type": "string", "description": "The ID of the author" },
+        "featuredImage": { "type": "string", "description": "URL of the featured image" },
+        "category": { "type": "string", "description": "The category of the blog post" },
+        "tags": { "type": "array", "items": { "type": "string" }, "description": "Tags for the blog post" },
+        "isPublished": { "type": "boolean", "description": "Whether the post is published or draft" },
+        "publishedAt": { "type": "string", "format": "date-time", "description": "When the post was published" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the post was created" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "When the post was last updated" }
+      },
+      "required": ["title", "content", "authorName", "authorId", "isPublished", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "blogPosts": {
+      "schema": { "$ref": "#/entities/BlogPost" },
+      "description": "Stores all blog posts"
+    }
+  }
+}

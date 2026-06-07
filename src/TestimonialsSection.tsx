@@ -35,7 +35,7 @@ export function TestimonialsSection() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="flex flex-col items-center text-center gap-2 mb-16">
-          <span className="text-purple-500 font-bold tracking-widest uppercase text-[10px]">05 // Testimonials</span>
+          <span className="text-purple-500 font-bold tracking-widest uppercase text-[10px]">06 // client feedback</span>
           <h2 className="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Client Success</h2>
           <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base max-w-xl mt-4">Hear from the pioneers who leveraged our solutions to transform their workflows and dominate their industries.</p>
         </div>

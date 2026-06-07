@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbase Chatbot Integration Integration</title>
+    <!-- Font pair -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide icons for high-end feel -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+
+    <!-- Demo UI Background mimicking MIDZERO portfolio website -->
+    <main class="demo-bg">
+        <div class="demo-hero">
+            <h1>MIDZERO</h1>
+            <p>WE REVEAL WHAT INTERESTS CUSTOMERS & BRING IT TO LIGHT</p>
+            <div class="status-indicator">
+                <span class="pulse-glow"></span>
+                <span>Chatbase Integration Live</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- FLOATING ACTIONS PORTAL -->
+    
+    <!-- 1. Custom Floating Balloon Button -->
+    <button id="chat-fab" class="chat-fab shadow-glow" aria-label="Open support assistant">
+        <span class="unread-dot"></span>
+        <i data-lucide="message-square" class="fab-icon"></i>
+    </button>
+
+    <!-- 2. Animated Chat Container Widget -->
+    <div id="chat-widget" class="chat-widget hidden">
+        <!-- Widget Header -->
+        <header class="widget-header">
+            <div class="bot-profile">
+                <div class="avatar-box">
+                    <span>MØ</span>
+                    <span class="online-indicator"></span>
+                </div>
+                <div class="avatar-meta">
+                    <h4>MIDZERO Assistant</h4>
+                    <p class="status-label">
+                        <span class="pulse-marker"></span>
+                        Chatbase Bot Active
+                    </p>
+                </div>
+            </div>
+            
+            <div class="header-utils">
+                <button id="clear-chat-history" title="Clear chat history" class="util-btn">
+                    <i data-lucide="trash-2"></i>
+                </button>
+                <button id="close-chat-widget" title="Close chat window" class="util-btn">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Message logs body -->
+        <div id="chat-messages" class="chat-messages-body">
+            <!-- Dynamic message nodes go here -->
+        </div>
+
+        <!-- Typing loader state -->
+        <div id="chat-typing" class="chat-typing-row hidden">
+            <div class="avatar-sub">MØ</div>
+            <div class="typing-bubble">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- Input control form -->
+        <form id="chat-input-form" class="chat-input-box">
+            <input 
+                type="text" 
+                id="chat-message-input" 
+                placeholder="Type your message to the agent..." 
+                autocomplete="off"
+                required
+            >
+            <button type="submit" id="chat-submit-btn" class="chat-send-btn">
+                <i data-lucide="send"></i>
+            </button>
+        </form>
+
+        <!-- Footer status tag -->
+        <footer class="widget-footer">
+            <i data-lucide="shield-alert"></i>
+            <span>Verified Secure. Powered by Chatbase</span>
+        </footer>
+    </div>
+
+    <!-- Official Chatbase embed.min.js Script Fallback Loader (Optional) -->
+    <!-- Place your official script injection block here to run Chatbase's secure cloud chatbot widget -->
+    <script>
+    /*
+    (function(){
+        if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+            window.chatbase=(...arguments)=>{
+                if(!window.chatbase.q){window.chatbase.q=[]}
+                window.chatbase.q.push(arguments)
+            };
+            window.chatbase=new Proxy(window.chatbase,{
+                get(target,prop){
+                    if(prop==="q"){return target.q}
+                    return(...args)=>target(prop,...args)
+                }
+            })
+        }
+        const onLoad=function(){
+            const script=document.createElement("script");
+            script.src="https://www.chatbase.co/embed.min.js";
+            
+            // --- REPLACE WITH YOUR CHATBOT ID ---
+            script.id = "R6w20MElns5JwFniAs9Wb"; 
+            
+            script.domain="www.chatbase.co";
+            document.body.appendChild(script)
+        };
+        if(document.readyState==="complete"){onLoad()}
+        else{window.addEventListener("load",onLoad)}
+    })();
+    */
+    </script>
+
+    <!-- Custom Chat widget controller logic -->
+    <script src="chatbot.js"></script>
+    <script>
+        // Initialize Lucide vector icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
