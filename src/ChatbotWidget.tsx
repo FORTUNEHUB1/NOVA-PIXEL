@@ -15,6 +15,8 @@ import {
   Trash2
 } from 'lucide-react';
 
+import { User } from 'firebase/auth';
+
 interface Message {
   id: string;
   role: 'user' | 'assistant' | 'system';
@@ -23,7 +25,11 @@ interface Message {
   isError?: boolean;
 }
 
-export default function ChatbotWidget() {
+interface ChatbotWidgetProps {
+  user?: User | null;
+}
+
+export default function ChatbotWidget({ user }: ChatbotWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [integrationMode, setIntegrationMode] = useState<'native' | 'official'>('official');
@@ -264,14 +270,16 @@ Let us know if you want to deploy a secure backend API proxy to query your chatb
 
               {/* Utility buttons */}
               <div className="flex items-center gap-1.5 text-zinc-400 dark:text-zinc-500">
-                <button 
-                  onClick={() => setShowConfig(!showConfig)}
-                  className={`p-1.5 hover:text-black dark:hover:text-white rounded-md hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-colors ${showConfig ? 'text-black dark:text-white' : ''}`}
-                  title="Widget Settings"
-                  id="chatbot-settings-toggle"
-                >
-                  <Settings className="w-4 h-4" />
-                </button>
+                {user && (
+                  <button 
+                    onClick={() => setShowConfig(!showConfig)}
+                    className={`p-1.5 hover:text-black dark:hover:text-white rounded-md hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-colors ${showConfig ? 'text-black dark:text-white' : ''}`}
+                    title="Widget Settings (Admin Only)"
+                    id="chatbot-settings-toggle"
+                  >
+                    <Settings className="w-4 h-4" />
+                  </button>
+                )}
                 <button 
                   onClick={() => setIsMaximized(!isMaximized)}
                   className="p-1.5 hover:text-black dark:hover:text-white rounded-md hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-colors hidden sm:block"
@@ -293,7 +301,7 @@ Let us know if you want to deploy a secure backend API proxy to query your chatb
 
             {/* Config Panel overlay inside headers/inputs */}
             <AnimatePresence>
-              {showConfig && (
+              {showConfig && user && (
                 <motion.div 
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}

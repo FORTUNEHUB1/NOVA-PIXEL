@@ -196,7 +196,7 @@ export default function App() {
             </div>
           </motion.div>
         </footer>
-        <ChatbotWidget />
+        <ChatbotWidget user={user} />
       </div>
     </BrowserRouter>
   );
