@@ -68,96 +68,48 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
   return (
     <>
       {/* Hero Section */}
-      <section 
-        className="relative pt-40 px-6 md:px-12 pb-24 md:pb-32 overflow-hidden bg-[#F0F0EE] dark:bg-[#0A0A0A] transition-colors duration-500"
-        onMouseMove={handleMouseMove}
-        style={{ perspective: 1500 }}
-      >
+      <section className="relative h-screen overflow-hidden bg-gray-50 flex items-center justify-center">
         {/* Background Video */}
         <video 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         >
-          <source src={aboutBgVideo} type="video/mp4" />
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_091828_e240eb17-6edc-4129-ad9d-98678e3fd238.mp4" type="video/mp4" />
         </video>
 
-        {/* 3D Floating Scattered Images */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-           <motion.img 
-             src={project1Img} 
-             className="absolute top-[10%] left-[5%] w-48 h-64 object-cover rounded-2xl shadow-2xl opacity-40 mix-blend-luminosity"
-             style={{ x: useTransform(smoothMouseX, [-0.5, 0.5], [-50, 50]), y: useTransform(smoothMouseY, [-0.5, 0.5], [-50, 50]), rotateZ: -15, rotateY: 10 }}
-             animate={{ y: [0, -20, 0] }}
-             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-           />
-           <motion.img 
-             src={project2Img} 
-             className="absolute top-[60%] left-[10%] w-64 h-48 object-cover rounded-2xl shadow-2xl opacity-40 mix-blend-luminosity"
-             style={{ x: useTransform(smoothMouseX, [-0.5, 0.5], [-80, 80]), y: useTransform(smoothMouseY, [-0.5, 0.5], [-80, 80]), rotateZ: 10, rotateX: 15 }}
-             animate={{ y: [0, 30, 0] }}
-             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-           />
-           <motion.img 
-             src={project3Img} 
-             className="absolute top-[15%] right-[5%] w-56 h-56 object-cover rounded-full shadow-2xl opacity-40 mix-blend-luminosity"
-             style={{ x: useTransform(smoothMouseX, [-0.5, 0.5], [60, -60]), y: useTransform(smoothMouseY, [-0.5, 0.5], [60, -60]), rotateZ: 5, rotateY: -15 }}
-             animate={{ y: [0, -25, 0] }}
-             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-           />
-           <motion.img 
-             src={smileBg} 
-             className="absolute bottom-[5%] right-[10%] w-72 h-40 object-cover rounded-2xl shadow-2xl opacity-40 mix-blend-luminosity"
-             style={{ x: useTransform(smoothMouseX, [-0.5, 0.5], [40, -40]), y: useTransform(smoothMouseY, [-0.5, 0.5], [40, -40]), rotateZ: -5, rotateX: -10 }}
-             animate={{ y: [0, 20, 0] }}
-             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-           />
+        {/* Content wrapper */}
+        <div className="relative z-10 flex flex-col items-center text-center mt-12 px-6">
+          <span className="text-sm font-black text-white drop-shadow-md tracking-widest mb-4 uppercase">MIDZERO</span>
+          
+          <div className="relative mb-6 flex flex-col items-center drop-shadow-2xl">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tighter">Creativity</h1>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tighter -mt-[2px]">That Actually<br/>Pays Off</h1>
+          </div>
+          
+          <div className="flex flex-wrap gap-4 items-center justify-center mt-6">
+            <button 
+              onClick={() => handleGatedLink("https://payhip.com/midzerohub")}
+              className="px-8 py-3 bg-[#FA1594] text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-[#FF3BA6] transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              Market
+            </button>
+            <button 
+              onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")}
+              className="px-8 py-3 bg-[#229ED9] text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-[#1C82B3] transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              Telegram
+            </button>
+            <button 
+              onClick={() => handleGatedLink("https://whop.com/fortune-digital-hub")}
+              className="px-8 py-3 bg-[#FF6243] text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-[#E54A2D] transition-all shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 cursor-pointer"
+            >
+              Whop
+            </button>
+          </div>
         </div>
-        
-        <motion.div 
-          className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10"
-          style={{ rotateX: heroRotateX, rotateY: heroRotateY, transformStyle: "preserve-3d" }}
-        >
-          <motion.h1 
-            initial={{ opacity: 0, y: 50, z: 0 }}
-            animate={{ opacity: 1, y: 0, z: 50 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[7vw] leading-[0.85] font-black uppercase tracking-tighter w-full drop-shadow-2xl"
-          >
-            Creativity<br />
-            That Actually<br />
-            Pays Off
-          </motion.h1>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="mt-12 flex flex-col items-center gap-10"
-          >
-            <div className="flex flex-wrap justify-center gap-6 mt-4">
-              <button 
-                onClick={() => handleGatedLink("https://payhip.com/midzerohub")}
-                className="px-12 py-6 bg-[#FA1594] text-white rounded-full text-base font-black uppercase tracking-widest hover:bg-[#FF3BA6] transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-[1.02] active:scale-95 duration-200 cursor-pointer"
-              >
-                Market
-              </button>
-              <button 
-                onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")}
-                className="px-12 py-6 bg-[#229ED9] text-white rounded-full text-base font-black uppercase tracking-widest hover:bg-[#1C82B3] transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-[1.02] active:scale-95 duration-200 cursor-pointer"
-              >
-                Telegram
-              </button>
-              <button 
-                onClick={() => handleGatedLink("https://whop.com/fortune-digital-hub")}
-                className="px-12 py-6 bg-[#FF6243] text-white rounded-full text-base font-black uppercase tracking-widest hover:bg-[#E54A2D] transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-[1.02] active:scale-95 duration-200 cursor-pointer"
-              >
-                Whop
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* Marquee */}

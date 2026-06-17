@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 
 interface AdminProps {
   user: User | null;
+  isAuthLoading?: boolean;
 }
 
 interface BlogPost {
@@ -26,9 +27,10 @@ interface BlogPost {
   updatedAt: Timestamp;
 }
 
-export default function Admin({ user }: AdminProps) {
+export default function Admin({ user, isAuthLoading = false }: AdminProps) {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [currentPost, setCurrentPost] = useState<Partial<BlogPost> | null>(null);
 
@@ -42,8 +44,43 @@ export default function Admin({ user }: AdminProps) {
   const [isPublished, setIsPublished] = useState(false);
 
   useEffect(() => {
-    fetchPosts();
-  }, [user]);
+    checkAdminStatus();
+  }, [user, isAuthLoading]);
+
+  const checkAdminStatus = async () => {
+    if (isAuthLoading) {
+      return;
+    }
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    
+    // Check if hardcoded owner
+    if (user.email === 'kemboifortune98@gmail.com') {
+      setIsAdmin(true);
+      fetchPosts();
+      return;
+    }
+
+    // Check database role
+    try {
+      const { getDoc, doc } = await import('firebase/firestore');
+      const adminDoc = await getDoc(doc(db, 'admins', user.uid));
+      if (adminDoc.exists()) {
+        setIsAdmin(true);
+        fetchPosts();
+      } else {
+        setIsAdmin(false);
+        setLoading(false);
+      }
+    } catch (e) {
+      console.error("Failed to verify admin status", e);
+      setIsAdmin(false);
+      setLoading(false);
+    }
+  };
 
   const fetchPosts = async () => {
     if (!user) return;
@@ -196,12 +233,25 @@ export default function Admin({ user }: AdminProps) {
     }
   };
 
-  if (!user) {
+  if (isAuthLoading || (user && loading)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6 text-center">
+         <div className="p-12 text-center text-gray-500 font-bold uppercase tracking-widest flex flex-col items-center gap-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#111] dark:border-white"></div>
+            Verifying Admin Status...
+         </div>
+      </div>
+    );
+  }
+
+  if (!user || (!loading && !isAdmin)) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 text-center">
         <div className="bg-white dark:bg-zinc-900 p-12 rounded-3xl shadow-xl border border-gray-200 dark:border-zinc-800">
           <h2 className="text-3xl font-black uppercase text-[#111] dark:text-white">Admin Access Restricted</h2>
-          <p className="mt-4 text-gray-500 font-medium mb-8">Please sign in to access the admin dashboard.</p>
+          <p className="mt-4 text-gray-500 font-medium mb-8">
+            {!user ? "Please sign in to access the admin dashboard." : "Access Denied. You do not have administrator privileges."}
+          </p>
           <a href="/login" className="px-8 py-4 bg-[#FA1594] text-white rounded-full font-black uppercase tracking-widest text-sm inline-block hover:scale-105 transition-transform">
             Go to Login
           </a>
@@ -212,6 +262,22 @@ export default function Admin({ user }: AdminProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 min-h-screen">
+      <div className="flex justify-end mb-8">
+        <div className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-full px-4 py-2 shadow-sm">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#FA1594] to-[#229ED9] flex items-center justify-center text-white font-bold text-xs">
+            {user?.email?.charAt(0).toUpperCase() || 'A'}
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#111] dark:text-white leading-tight">
+              {user?.displayName || 'Administrator'}
+            </span>
+            <span className="text-[10px] uppercase tracking-widest text-gray-500 font-medium">
+              {user?.email}
+            </span>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-gray-200 dark:border-zinc-800 pb-8 gap-6">
         <div>
           <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] dark:text-white">Admin Dashboard</h1>

@@ -87,74 +87,55 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#F0F0EE] text-[#111111] dark:bg-[#0A0A0A] dark:text-[#F0F0EE] font-sans selection:bg-[#111] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-500">
+      <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-gray-900 selection:text-white transition-colors duration-500">
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 w-full p-6 md:px-12 flex justify-between items-center z-50 text-[#111] dark:text-white transition-colors duration-500 overflow-visible bg-white/10 dark:bg-black/10 backdrop-blur-md border-b border-white/20 dark:border-white/10">
-          <Link to="/" className="text-2xl font-black tracking-tighter uppercase">MIDZERO</Link>
-          
-          <div className="flex items-center gap-6 md:gap-10">
-            <div className="hidden md:flex gap-10 font-bold uppercase tracking-widest text-xs">
-              <Link to="/" className="hover:opacity-70 transition-opacity">Home</Link>
-              <Link to="/blog" className="hover:opacity-70 transition-opacity">Blog</Link>
-              <a href="#" className="hover:opacity-70 transition-opacity">About</a>
-              <a href="#" className="hover:opacity-70 transition-opacity">Work</a>
-              {user && <Link to="/admin" className="hover:opacity-70 transition-opacity text-[#FA1594]">Admin</Link>}
+        <nav className="absolute top-0 left-0 w-full z-50">
+          <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+            <Link to="/" className="text-2xl font-black tracking-tighter uppercase text-gray-900">MIDZERO</Link>
+            
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8 font-medium text-gray-900">
+              <Link to="/" className="hover:text-gray-700 transition-colors">Start</Link>
+              <Link to="/blog" className="hover:text-gray-700 transition-colors">Blog</Link>
+              {user && <Link to="/admin" className="hover:text-gray-700 transition-colors font-bold">Admin</Link>}
             </div>
 
             <div className="flex items-center gap-4">
               {!user ? (
-                <Link to="/login" className="hidden sm:block text-xs font-bold uppercase border border-current px-4 py-2 rounded-full hover:bg-[#111] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">SignIn</Link>
+                <Link to="/login" className="hidden sm:block text-sm font-medium text-gray-900 border border-gray-900 px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-colors">Sign In</Link>
               ) : (
-                <button onClick={handleSignOut} className="hidden sm:block text-[10px] font-bold uppercase tracking-widest text-red-500 hover:text-red-700">Exit</button>
+                <button onClick={handleSignOut} className="hidden sm:block text-sm font-medium text-red-600 hover:text-red-700 transition-colors">Logout</button>
               )}
               
+              {/* Mobile Menu Button */}
               <button 
-                onClick={toggleTheme} 
-                className="px-4 py-2 rounded-full border border-current hover:bg-[#111] hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-[10px] font-black uppercase tracking-widest cursor-pointer"
-                aria-label="Toggle Theme"
+                className="md:hidden text-gray-900 p-2"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle Menu"
               >
-                {theme === 'light' ? 'Dark' : 'Light'}
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>
-
-          <button 
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-[#111] text-white z-[60] flex flex-col justify-center items-center gap-8 text-3xl font-black uppercase tracking-tighter">
-            <div className="absolute top-6 right-6">
-               <button onClick={() => setIsMenuOpen(false)}><X className="w-8 h-8" /></button>
-            </div>
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
-            <Link to="/blog" onClick={() => setIsMenuOpen(false)}>Blog</Link>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>About</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>Work</a>
-            <a href="#" onClick={() => setIsMenuOpen(false)}>Contact</a>
-            {user && <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="text-[#FA1594]">Admin</Link>}
-            
-            <div className="mt-8 flex gap-4">
-              {!user ? (
-                 <Link to="/login" onClick={() => setIsMenuOpen(false)} className="text-xl font-bold uppercase border border-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition-colors">Sign In</Link>
-              ) : (
-                 <button onClick={() => { handleSignOut(); setIsMenuOpen(false); }} className="text-xl font-bold uppercase text-red-500 tracking-widest">Sign Out</button>
-              )}
+          <div className="md:hidden fixed top-24 left-4 right-4 z-[60]">
+            <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex flex-col p-6 gap-6 text-lg font-medium text-gray-900 border border-white/20">
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-gray-600 transition-colors">Start</Link>
+              <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-gray-600 transition-colors">Blog</Link>
+              {user && <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-gray-600 transition-colors">Admin</Link>}
             </div>
           </div>
         )}
 
-        <main className="pt-24 uppercase-headings bg-[#F0F0EE] dark:bg-[#0A0A0A]">
+        <main className="flex-1 w-full bg-transparent">
           <Routes>
             <Route path="/" element={<Home handleGatedLink={handleGatedLink} />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog/:id" element={<BlogPostPage />} />
-            <Route path="/admin" element={<Admin user={user} />} />
+            <Route path="/admin" element={<Admin user={user} isAuthLoading={isAuthLoading} />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </main>

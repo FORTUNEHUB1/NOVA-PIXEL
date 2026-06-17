@@ -38,11 +38,8 @@ export default function ChatbotWidget({ user }: ChatbotWidgetProps) {
   const [isLoading, setIsLoading] = useState(false);
   
   // Chatbase Credentials Configurations
-  const [chatbotId, setChatbotId] = useState('R6w20MElns5JwFniAs9Wb');
-  const [apiKey, setApiKey] = useState('');
-  const [useProxy, setUseProxy] = useState(true);
-  const [proxyUrl, setProxyUrl] = useState('/api/chatbase');
-  const [showConfig, setShowConfig] = useState(false);
+  const [chatbotId] = useState('R6w20MElns5JwFniAs9Wb');
+  const proxyUrl = '/api/chatbase';
 
   const messageEndRef = useRef<HTMLDivElement>(null);
 
@@ -120,54 +117,35 @@ I am here to help you learn more about MIDZERO's products, services, and creativ
     setIsLoading(true);
 
     try {
-      let botResponseText = '';
-      
-      if (!apiKey && useProxy === false) {
-        // Fallback simulate response if no key is entered & proxy is turned off
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        botResponseText = `🤖 **Local Mode Active**: I received your query: "${userText}". 
-        
-To connect this query directly to your official Chatbase bot, you can either:
-1. Toggle to **"Official Embedded"** mode using the Settings icon in the header.
-2. Enter your **Chatbase API Key** in the settings panel to enable direct API communication.
+      // Always use the secure proxy
+      const targetUrl = proxyUrl;
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
 
-Let us know if you want to deploy a secure backend API proxy to query your chatbot without exposing your key!`;
-      } else {
-        // Query Chatbase API
-        const targetUrl = useProxy ? proxyUrl : 'https://www.chatbase.co/api/v1/chat';
-        
-        const headers: Record<string, string> = {
-          'Content-Type': 'application/json',
-        };
+      const payload = {
+        messages: messages.concat(userMessage).map(msg => ({
+          role: msg.role === 'assistant' ? 'assistant' : 'user',
+          content: msg.content
+        })),
+        chatbotId: chatbotId,
+        stream: false,
+        temperature: 0.7
+      };
 
-        if (!useProxy && apiKey) {
-          headers['Authorization'] = `Bearer ${apiKey}`;
-        }
+      const response = await fetch(targetUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload)
+      });
 
-        const payload = {
-          messages: messages.concat(userMessage).map(msg => ({
-            role: msg.role === 'assistant' ? 'assistant' : 'user',
-            content: msg.content
-          })),
-          chatbotId: chatbotId,
-          stream: false,
-          temperature: 0.7
-        };
-
-        const response = await fetch(targetUrl, {
-          method: 'POST',
-          headers,
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`API responded with status code ${response.status}`);
-        }
-
-        const data = await response.json();
-        // Chatbase v1 response has either 'text' or 'message' property
-        botResponseText = data.text || data.message || JSON.stringify(data);
+      if (!response.ok) {
+        throw new Error(`API responded with status code ${response.status}`);
       }
+
+      const data = await response.json();
+      // Chatbase v1 response has either 'text' or 'message' property
+      const botResponseText = data.text || data.message || JSON.stringify(data);
 
       const botMessage: Message = {
         id: `bot-${Date.now()}`,
@@ -270,16 +248,6 @@ Let us know if you want to deploy a secure backend API proxy to query your chatb
 
               {/* Utility buttons */}
               <div className="flex items-center gap-1.5 text-zinc-400 dark:text-zinc-500">
-                {user && (
-                  <button 
-                    onClick={() => setShowConfig(!showConfig)}
-                    className={`p-1.5 hover:text-black dark:hover:text-white rounded-md hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-colors ${showConfig ? 'text-black dark:text-white' : ''}`}
-                    title="Widget Settings (Admin Only)"
-                    id="chatbot-settings-toggle"
-                  >
-                    <Settings className="w-4 h-4" />
-                  </button>
-                )}
                 <button 
                   onClick={() => setIsMaximized(!isMaximized)}
                   className="p-1.5 hover:text-black dark:hover:text-white rounded-md hover:bg-neutral-100 dark:hover:bg-zinc-800 transition-colors hidden sm:block"
@@ -299,128 +267,7 @@ Let us know if you want to deploy a secure backend API proxy to query your chatb
               </div>
             </div>
 
-            {/* Config Panel overlay inside headers/inputs */}
-            <AnimatePresence>
-              {showConfig && user && (
-                <motion.div 
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="bg-white dark:bg-[#111] border-b border-zinc-200 dark:border-zinc-800 p-4 font-sans text-xs flex flex-col gap-3 overflow-hidden text-neutral-700 dark:text-neutral-400"
-                >
-                  <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
-                    <span className="font-bold text-black dark:text-white flex items-center gap-1">
-                      <Sparkles className="w-3.5 h-3.5 text-orange-400" />
-                      Integration Controller
-                    </span>
-                    <button 
-                      onClick={() => setShowConfig(false)}
-                      className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
-                    >
-                      Close
-                    </button>
-                  </div>
-
-                  {/* Mode Buttons selection */}
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                      Mounting Mode
-                    </label>
-                    <div className="grid grid-cols-2 gap-1.5 bg-neutral-100 dark:bg-zinc-900 p-1 rounded-md">
-                      <button
-                        onClick={() => setMode('official')}
-                        className={`py-1.5 text-center font-bold rounded-sm transition-all cursor-pointer ${integrationMode === 'official' ? 'bg-white dark:bg-zinc-800 text-black dark:text-white shadow-sm' : 'text-neutral-500'}`}
-                      >
-                        Official Embed
-                      </button>
-                      <button
-                        onClick={() => setMode('native')}
-                        className={`py-1.5 text-center font-bold rounded-sm transition-all cursor-pointer ${integrationMode === 'native' ? 'bg-white dark:bg-zinc-800 text-black dark:text-white shadow-sm' : 'text-neutral-500'}`}
-                      >
-                        Custom API Live
-                      </button>
-                    </div>
-                  </div>
-
-                  {integrationMode === 'native' ? (
-                    <div className="flex flex-col gap-2.5">
-                      <div>
-                        <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                          API Key (Frontend Secret key override)
-                        </label>
-                        <input 
-                          type="password"
-                          value={apiKey}
-                          onChange={(e) => setApiKey(e.target.value)}
-                          placeholder="wrihlrhhuj3jdu9g3hqzm36gzcl..."
-                          className="w-full bg-neutral-100 dark:bg-zinc-900 text-neutral-900 dark:text-white border border-zinc-300 dark:border-zinc-800 rounded px-2.5 py-1.5 focus:outline-none focus:border-black dark:focus:border-white font-mono text-[11px]"
-                        />
-                      </div>
-                      
-                      <div className="flex items-center gap-2 mt-1">
-                        <input 
-                          type="checkbox"
-                          id="use_proxy_chk"
-                          checked={useProxy}
-                          onChange={(e) => setUseProxy(e.target.checked)}
-                          className="rounded text-black accent-black"
-                        />
-                        <label htmlFor="use_proxy_chk" className="font-medium cursor-pointer">
-                          Use node authorization security proxy
-                        </label>
-                      </div>
-
-                      {useProxy && (
-                        <div>
-                          <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                            Secure Proxy Route Url
-                          </label>
-                          <input 
-                            type="text"
-                            value={proxyUrl}
-                            onChange={(e) => setProxyUrl(e.target.value)}
-                            className="w-full bg-neutral-100 dark:bg-zinc-900 text-neutral-900 dark:text-white border border-zinc-300 dark:border-zinc-800 rounded px-2.5 py-1.5 focus:outline-none focus:border-black dark:focus:border-white font-mono"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-2">
-                      <div>
-                        <label className="block text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-1">
-                          Chatbot Public Id
-                        </label>
-                        <input 
-                          type="text"
-                          value={chatbotId}
-                          onChange={(e) => setChatbotId(e.target.value)}
-                          placeholder="R6w20MElns5JwFniAs9Wb"
-                          className="w-full bg-neutral-100 dark:bg-zinc-900 text-neutral-900 dark:text-white border border-zinc-300 dark:border-zinc-800 rounded px-2.5 py-1.5 focus:outline-none focus:border-black dark:focus:border-white font-mono"
-                        />
-                      </div>
-                      <p className="text-[10px] text-zinc-500 leading-normal">
-                        ℹ️ This loads your live chat assistant cleanly inside our beautiful containment box. No API keys are leaked in public code!
-                      </p>
-                    </div>
-                  )}
-
-                  <div className="flex justify-end gap-1.5 pt-1.5 border-t border-zinc-100 dark:border-zinc-800">
-                    <button 
-                      onClick={clearHistory}
-                      className="px-2.5 py-1.5 bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 font-bold rounded flex items-center gap-1 hover:bg-red-200 cursor-pointer"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" /> Clear History
-                    </button>
-                    <button 
-                      onClick={() => setShowConfig(false)}
-                      className="px-3 py-1.5 bg-black text-white dark:bg-white dark:text-black font-bold rounded hover:opacity-90 cursor-pointer"
-                    >
-                      Save Settings
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Config Panel overlay removed for security */}
 
             {/* Primary Interactive Body Area */}
             <div className="flex-1 relative flex flex-col justify-between overflow-hidden">
@@ -502,32 +349,31 @@ Let us know if you want to deploy a secure backend API proxy to query your chatb
                   {/* Input Form Box bottom */}
                   <form 
                     onSubmit={handleSendMessage}
-                    className="p-3 bg-white dark:bg-[#111] border-t border-zinc-200 dark:border-zinc-800 flex gap-2"
+                    className="p-4 bg-white dark:bg-[#111] border-t border-zinc-100 dark:border-zinc-900 flex gap-2.5"
                   >
                     <input 
                       type="text"
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
-                      placeholder="Type your message to the agent..."
+                      placeholder="Ask MIDZERO AI anything..."
                       disabled={isLoading}
-                      className="flex-1 bg-neutral-100 dark:bg-zinc-900 text-neutral-900 dark:text-white border border-zinc-300 dark:border-zinc-800 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-black dark:focus:border-white disabled:opacity-50"
+                      className="flex-1 bg-zinc-50 dark:bg-zinc-900/50 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 rounded-full px-5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent transition-all outline-none"
                     />
                     <button 
                       type="submit"
                       disabled={!inputText.trim() || isLoading}
-                      className="w-9 h-9 bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 rounded-full flex items-center justify-center transition-all disabled:opacity-40 cursor-pointer flex-shrink-0"
+                      className="w-10 h-10 bg-black text-white hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-100 rounded-full flex items-center justify-center transition-all disabled:opacity-30 disabled:hover:bg-black dark:disabled:hover:bg-white cursor-pointer flex-shrink-0 shadow-sm"
                     >
-                      <Send className="w-4 h-4 ml-0.5" />
+                      <Send className="w-4 h-4" />
                     </button>
                   </form>
                 </div>
               )}
             </div>
             
-            {/* Tiny brand label bottom margins representation */}
-            <div className="bg-white dark:bg-[#111] border-t border-zinc-200 dark:border-zinc-800 py-1 text-center text-[9px] text-zinc-400 font-bold tracking-widest uppercase flex items-center justify-center gap-1 select-none">
-              <ShieldAlert className="w-3 h-3 text-zinc-400" />
-              Chatbase Encryption Enabled.
+            {/* Friendly footer */}
+            <div className="bg-zinc-50 dark:bg-[#151515] border-t border-zinc-100 dark:border-zinc-900 py-2.5 text-center text-[10px] text-zinc-400 font-medium tracking-wide flex items-center justify-center gap-1 select-none">
+              Powered by MIDZERO AI
             </div>
           </motion.div>
         )}

@@ -50,5 +50,11 @@ service cloud.firestore {
     match /admins/{userId} {
       allow read: if request.auth != null && request.auth.uid == userId;
     }
+
+    match /auditLogs/{logId} {
+      // Allow anybody to create an audit log (e.g. failed login attempts)
+      allow create: if true;
+      allow read: if isAdmin();
+    }
   }
 }
