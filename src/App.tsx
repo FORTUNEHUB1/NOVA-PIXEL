@@ -44,21 +44,10 @@ export default function App() {
     }
   };
 
-  const handleGatedLink = async (url: string) => {
-    if (user) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    } else {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-        if (result.user) {
-          const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-            window.location.href = url;
-          }
-        }
-      } catch (error) {
-        console.error('Sign-in required to open link:', error);
-      }
+  const handleGatedLink = (url: string) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      window.location.href = url;
     }
   };
 
