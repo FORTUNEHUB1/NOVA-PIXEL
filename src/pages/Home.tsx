@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion, useTransform, useMotionValue, useSpring } from 'motion/react';
+import { motion, AnimatePresence, useTransform, useMotionValue, useSpring } from 'motion/react';
 import { Menu, X, ArrowRight, ArrowUpRight, PhoneOff, Mic, Video, FileText, Pencil, MoreHorizontal } from 'lucide-react';
 import { CoverFlowHero } from '../components/CoverFlowHero';
 import { CrmDashboardMockup } from '../components/CrmDashboardMockup';
@@ -14,6 +14,7 @@ import { FaTiktok, FaPinterest, FaInstagram, FaYoutube, FaFacebook, FaWhatsapp }
 
 export default function Home({ handleGatedLink }: { handleGatedLink: (url: string) => void }) {
   const navigate = useNavigate();
+  const [activeLightbox, setActiveLightbox] = useState<{ src: string, title: string, desc?: string } | null>(null);
   // Mouse Tracking for Interactive 3D Parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -77,7 +78,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       <section 
         className="relative min-h-screen overflow-hidden bg-[#181818] flex items-end justify-start pb-16 md:pb-24 pt-32"
         style={{ 
-          backgroundImage: "url('/android-bg-1.jpg')", 
+          backgroundImage: "url('/android-bg-2.jpg')", 
           backgroundSize: 'cover', 
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -186,7 +187,14 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 />
 
                 {/* Floating self-avatar image (PIP) inside the video call frame */}
-                <div className="absolute top-[65px] right-4 w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] rounded-2xl overflow-hidden border-2 border-white/30 shadow-2xl z-20 hover:scale-105 transition-transform duration-300 pointer-events-auto">
+                <div 
+                  onClick={() => setActiveLightbox({ 
+                    src: avatarBg, 
+                    title: "Self View Studio Portrait", 
+                    desc: "An ultra-premium, AI-enhanced professional studio portrait capturing detailed lighting, clean tones, and authentic expression."
+                  })}
+                  className="absolute top-[65px] right-4 w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] rounded-2xl overflow-hidden border-2 border-white/30 shadow-2xl z-20 hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
+                >
                   <img 
                     src={avatarBg} 
                     alt="Self View" 
@@ -518,7 +526,15 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             variants={reveal3D}
             transition={reveal3D.transition}
           >
-            <div className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-[#EAEAEA] rounded-3xl" style={{ transformStyle: 'preserve-3d' }}>
+            <div 
+              onClick={() => setActiveLightbox({ 
+                src: project1Img, 
+                title: "LIVV Audio App", 
+                desc: "Our state-of-the-art interactive audio application designed for supreme user experience and premium sound delivery. Built with React and advanced motion libraries."
+              })}
+              className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-[#EAEAEA] rounded-3xl cursor-pointer" 
+              style={{ transformStyle: 'preserve-3d' }}
+            >
               <motion.img 
                 whileHover={{ scale: 1.05, rotateX: 5, rotateY: -5, z: 20 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -549,7 +565,15 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             variants={reveal3D}
             transition={reveal3D.transition}
           >
-            <div className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-[#EAEAEA] rounded-3xl" style={{ transformStyle: 'preserve-3d' }}>
+            <div 
+              onClick={() => setActiveLightbox({ 
+                src: project2Img, 
+                title: "Branding for Mezcal Apeña", 
+                desc: "A premium mezcal brand design centered around tradition, quality, and female empowerment. Featuring custom agave patterns, illustrative silhouettes, and elegant visual branding."
+              })}
+              className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-[#EAEAEA] rounded-3xl cursor-pointer" 
+              style={{ transformStyle: 'preserve-3d' }}
+            >
               <motion.img 
                 whileHover={{ scale: 1.05, rotateX: 5, rotateY: 5, z: 20 }}
                 transition={{ duration: 0.6, ease: "easeOut" as any }}
@@ -593,7 +617,15 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             variants={reveal3D}
             transition={reveal3D.transition}
           >
-            <div className="w-full lg:w-1/2 overflow-hidden aspect-square bg-[#EAEAEA] rounded-3xl" style={{ transformStyle: 'preserve-3d' }}>
+            <div 
+              onClick={() => setActiveLightbox({ 
+                src: project3Img, 
+                title: "Waunt: Integrated marketing campaign", 
+                desc: "An elite skincare advertising campaign targeting Gen Z audiences. Merging high-contrast typography, interactive motion graphics, and rich brand storytelling across multiple social mediums."
+              })}
+              className="w-full lg:w-1/2 overflow-hidden aspect-square bg-[#EAEAEA] rounded-3xl cursor-pointer" 
+              style={{ transformStyle: 'preserve-3d' }}
+            >
               <motion.img 
                 whileHover={{ scale: 1.05, rotateX: 5, rotateY: -5, z: 20 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -623,6 +655,95 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
         </div>
       </section>
+
+      {/* Lightbox Modal with GET IT CTA button */}
+      <AnimatePresence>
+        {activeLightbox && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveLightbox(null)}
+              className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+            />
+            
+            {/* Modal Body */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              transition={{ type: "spring", damping: 25, stiffness: 180 }}
+              className="relative w-full max-w-5xl bg-zinc-900 border border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,255,102,0.15)] flex flex-col md:flex-row z-10"
+            >
+              {/* Close Button */}
+              <button 
+                onClick={() => setActiveLightbox(null)}
+                className="absolute top-6 right-6 z-20 p-3 bg-black/60 hover:bg-[#00FF66] hover:text-black text-white rounded-full backdrop-blur-md transition-all duration-300 border border-white/10 hover:border-[#00FF66] cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Image side */}
+              <div className="w-full md:w-3/5 h-[300px] md:h-[600px] relative bg-black/30 flex items-center justify-center p-4">
+                <img 
+                  src={activeLightbox.src} 
+                  alt={activeLightbox.title} 
+                  className="w-full h-full object-contain rounded-2xl" 
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              {/* Info side */}
+              <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-between bg-zinc-950 border-t md:border-t-0 md:border-l border-white/10">
+                <div className="space-y-6">
+                  <span className="text-[10px] bg-[#00FF66]/10 text-[#00FF66] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-[#00FF66]/20 inline-block">
+                    Media File Preview
+                  </span>
+                  <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-none">
+                    {activeLightbox.title}
+                  </h3>
+                  {activeLightbox.desc && (
+                    <p className="text-zinc-400 font-medium text-sm leading-relaxed">
+                      {activeLightbox.desc}
+                    </p>
+                  )}
+                  <div className="pt-4 border-t border-white/5 space-y-3">
+                    <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-zinc-500">
+                      <span>Format</span>
+                      <span className="text-white">High-Res Image</span>
+                    </div>
+                    <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-zinc-500">
+                      <span>Dimensions</span>
+                      <span className="text-white">4096 x 4096 px</span>
+                    </div>
+                    <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-zinc-500">
+                      <span>Distribution</span>
+                      <span className="text-[#00FF66]">Original Source File</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-8">
+                  <button 
+                    onClick={() => {
+                      window.open('https://payhip.com/midzerohub', '_blank');
+                    }}
+                    className="w-full py-4 bg-[#00FF66] hover:bg-[#00FF66]/90 active:scale-95 text-black font-black uppercase tracking-widest rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(0,255,102,0.3)] hover:shadow-[0_0_40px_rgba(0,255,102,0.5)] cursor-pointer flex items-center justify-center gap-2 text-sm"
+                  >
+                    GET IT
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                  <p className="text-[10px] text-zinc-500 font-bold text-center mt-3 uppercase tracking-wider">
+                    Instant Download Access Included
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

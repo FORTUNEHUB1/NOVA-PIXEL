@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, X } from 'lucide-react';
+import { Search, X, ArrowUpRight } from 'lucide-react';
 
 import imgRegenerated1778939110589 from './assets/images/regenerated_image_1778939110589.jpg';
 import imgRegenerated1778939099473 from './assets/images/regenerated_image_1778939099473.jpg';
@@ -162,6 +162,18 @@ export function PortfolioSection() {
                 <p className="text-zinc-600 dark:text-zinc-300 font-medium leading-relaxed">
                   {selectedProject.desc}
                 </p>
+                
+                <div className="mt-6">
+                  <button 
+                    onClick={() => {
+                      window.open('https://payhip.com/midzerohub', '_blank');
+                    }}
+                    className="w-full sm:w-auto px-8 py-3.5 bg-[#00FF66] hover:bg-[#00FF66]/90 active:scale-95 text-black font-black uppercase tracking-widest rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(0,255,102,0.3)] hover:shadow-[0_0_30px_rgba(0,255,102,0.5)] cursor-pointer flex items-center justify-center gap-2 text-xs"
+                  >
+                    GET IT
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                </div>
                 
                 <div className="mt-8 pt-8 border-t border-zinc-200 dark:border-zinc-800">
                   <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-widest mb-3">Project Details</h4>
