@@ -21,7 +21,7 @@ This options requires **zero server installation** or backend configurations. Ch
    ```html
    <iframe
        src="https://www.chatbase.co/chatbot-iframe/R6w20MElns5JwFniAs9Wb"
-       title="MIDZERO Chatbase Assistant"
+       title="BLACKPIXEL Chatbase Assistant"
        width="100%"
        height="100%"
        frameBorder="0"

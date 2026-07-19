@@ -89,15 +89,15 @@ export default function BlogList() {
         </div>
 
         {/* Search */}
-        <div className="relative w-full md:w-72">
+        <div className="relative w-full md:w-72 bg-white/20 dark:bg-zinc-900/20 backdrop-blur-md rounded-full border border-white/30 dark:border-zinc-700/50 shadow-lg focus-within:shadow-[0_0_20px_rgba(0,255,102,0.3)] transition-all">
           <input
             type="text"
             placeholder="SEARCH..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-full px-5 py-3 pl-12 text-sm uppercase tracking-widest font-bold focus:outline-none focus:border-[#111] dark:focus:border-white transition-colors"
+            className="w-full bg-transparent border-none rounded-full px-5 py-3 pl-12 text-sm uppercase tracking-widest font-bold focus:outline-none text-gray-900 dark:text-white placeholder-gray-500"
           />
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-zinc-400" />
         </div>
       </div>
 

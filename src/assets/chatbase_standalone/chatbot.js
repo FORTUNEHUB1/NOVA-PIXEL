@@ -12,7 +12,7 @@ const API_PROXY_URL = '/api/chatbase';
 
 // --- STATE MANAGEMENT ---
 let chatMessages = [];
-const DEFAULT_WELCOME = `👋 Hi! Welcome to **MIDZERO**. I am your personal Chatbase-powered support assistant.
+const DEFAULT_WELCOME = `👋 Hi! Welcome to **BLACKPIXEL**. I am your personal Chatbase-powered support assistant.
 
 Ask me any questions about our digital strategies, web engineering packages, or custom branding works!`;
 

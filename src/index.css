@@ -143,3 +143,55 @@
 .neon-shadow {
   box-shadow: 0 0 20px -5px var(--color-neon-blue), 0 0 40px -10px var(--color-neon-purple);
 }
+
+@keyframes nano-glow-pink {
+  0%, 100% {
+    box-shadow: 0 0 6px #FA1594, 0 0 12px rgba(250, 21, 148, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px #FA1594, 0 0 24px rgba(250, 21, 148, 0.8);
+  }
+}
+
+@keyframes nano-glow-blue {
+  0%, 100% {
+    box-shadow: 0 0 6px #229ED9, 0 0 12px rgba(34, 158, 217, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px #229ED9, 0 0 24px rgba(34, 158, 217, 0.8);
+  }
+}
+
+@keyframes nano-glow-orange {
+  0%, 100% {
+    box-shadow: 0 0 6px #FF6243, 0 0 12px rgba(255, 98, 67, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px #FF6243, 0 0 24px rgba(255, 98, 67, 0.8);
+  }
+}
+
+@keyframes nano-glow-green {
+  0%, 100% {
+    box-shadow: 0 0 6px #00FF66, 0 0 12px rgba(0, 255, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px #00FF66, 0 0 24px rgba(0, 255, 102, 0.8);
+  }
+}
+
+.nano-glow-pink {
+  animation: nano-glow-pink 2.5s infinite ease-in-out;
+}
+
+.nano-glow-blue {
+  animation: nano-glow-blue 2.5s infinite ease-in-out;
+}
+
+.nano-glow-orange {
+  animation: nano-glow-orange 2.5s infinite ease-in-out;
+}
+
+.nano-glow-green {
+  animation: nano-glow-green 2.5s infinite ease-in-out;
+}

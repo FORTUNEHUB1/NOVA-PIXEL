@@ -10,6 +10,7 @@ import BlogList from './pages/BlogList';
 import BlogPostPage from './pages/BlogPost';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
+import { PortfolioSection } from './PortfolioSection';
 import ChatbotWidget from './ChatbotWidget';
 
 export default function App() {
@@ -80,10 +81,10 @@ export default function App() {
         {/* Navigation */}
         <nav className="absolute top-0 left-0 w-full z-50">
           <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
-            <Link to="/" className="text-2xl font-black tracking-tighter uppercase text-gray-900">MIDZERO</Link>
+            <Link to="/" className="text-2xl font-black tracking-tighter uppercase text-gray-900 bg-white/30 backdrop-blur-md px-4 py-2 rounded-xl border border-white/40 shadow-sm hover:bg-white/40 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all">BLACKPIXEL</Link>
             
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8 font-medium text-gray-900">
+            <div className="hidden md:flex items-center gap-8 font-medium text-gray-900 bg-white/30 backdrop-blur-md px-6 py-2 rounded-full border border-white/40 shadow-sm active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all">
               <Link to="/" className="hover:text-gray-700 transition-colors">Start</Link>
               <Link to="/blog" className="hover:text-gray-700 transition-colors">Blog</Link>
               {user && <Link to="/admin" className="hover:text-gray-700 transition-colors font-bold">Admin</Link>}
@@ -91,14 +92,14 @@ export default function App() {
 
             <div className="flex items-center gap-4">
               {!user ? (
-                <Link to="/login" className="hidden sm:block text-sm font-medium text-gray-900 border border-gray-900 px-4 py-2 rounded-full hover:bg-gray-900 hover:text-white transition-colors">Sign In</Link>
+                <Link to="/login" className="hidden sm:block text-sm font-medium text-gray-900 border border-white/40 bg-white/30 backdrop-blur-md px-6 py-2 rounded-full hover:bg-white/50 hover:text-gray-900 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all shadow-sm">Sign In</Link>
               ) : (
-                <button onClick={handleSignOut} className="hidden sm:block text-sm font-medium text-red-600 hover:text-red-700 transition-colors">Logout</button>
+                <button onClick={handleSignOut} className="hidden sm:block text-sm font-medium text-red-600 bg-white/30 backdrop-blur-md border border-white/40 px-6 py-2 rounded-full hover:bg-white/50 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all shadow-sm">Logout</button>
               )}
               
               {/* Mobile Menu Button */}
               <button 
-                className="md:hidden text-gray-900 p-2"
+                className="md:hidden text-gray-900 p-2 bg-white/30 backdrop-blur-md border border-white/40 rounded-full shadow-sm hover:bg-white/40 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle Menu"
               >
@@ -126,12 +127,13 @@ export default function App() {
             <Route path="/blog/:id" element={<BlogPostPage />} />
             <Route path="/admin" element={<Admin user={user} isAuthLoading={isAuthLoading} />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/portfolio" element={<PortfolioSection />} />
           </Routes>
         </main>
 
         <footer className="bg-[#111] text-[#F0F0EE] py-24 px-6 md:px-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none text-[20vw] font-black leading-none uppercase translate-x-1/4 -translate-y-1/4 mix-blend-overlay">
-            MIDZERO
+            BLACKPIXEL
           </div>
           <motion.div 
             className="max-w-7xl mx-auto flex flex-col gap-24 relative z-10"
@@ -146,7 +148,7 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-[#333] pt-12 text-sm text-[#999] font-medium leading-relaxed">
               <div>
                 <p className="mb-4 text-white font-bold uppercase tracking-widest">About</p>
-                <p>Ⓒ MIDZERO Creative Agency,<br/>2017 - {new Date().getFullYear()} | All rights reserved.</p>
+                <p>Ⓒ BLACKPIXEL Creative Agency,<br/>2017 - {new Date().getFullYear()} | All rights reserved.</p>
               </div>
               <div className="flex flex-col gap-2">
                 <p className="mb-2 text-white font-bold uppercase tracking-widest">Legal</p>
