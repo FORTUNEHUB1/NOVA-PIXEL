@@ -23,8 +23,9 @@ import imgRegen1782991355625 from './assets/images/regenerated_image_17829913556
 import imgRegen1782991356356 from './assets/images/regenerated_image_1782991356356.jpg';
 import imgRegen1782991358653 from './assets/images/regenerated_image_1782991358653.webp';
 import imgRegen1782991361628 from './assets/images/regenerated_image_1782991361628.jpg';
+import androidBg from './assets/images/android-bg-2.jpg';
 
-export function PortfolioSection() {
+export default function PortfolioSection({ embedded = false }: { embedded?: boolean } = {}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProject, setSelectedProject] = useState<{title: string, tech: string[], category: string, img: string, desc: string} | null>(null);
 
@@ -58,8 +59,11 @@ export function PortfolioSection() {
   });
 
   return (
-    <section className="pt-32 pb-24 min-h-screen bg-zinc-100 dark:bg-[#080808] border-t border-zinc-200 dark:border-white/5 relative z-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section 
+      className={`${embedded ? 'pt-8 pb-12 min-h-[600px] rounded-3xl' : 'pt-32 pb-24 min-h-screen border-t border-zinc-200 dark:border-white/5'} bg-zinc-100 dark:bg-[#080808] relative z-20 bg-cover bg-center bg-no-repeat`}
+      style={{ backgroundImage: `linear-gradient(to bottom, rgba(8,8,8,0.7), rgba(8,8,8,0.9)), url(${androidBg})` }}
+    >
+      <div className={`${embedded ? 'max-w-full px-6' : 'max-w-7xl mx-auto px-6 lg:px-12'}`}>
         <div className="flex flex-col gap-2 mb-10">
           <span className="text-blue-500 font-bold tracking-widest uppercase text-[10px]">04 // Innovation Hub</span>
           <h2 className="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Portfolio Projects</h2>
@@ -166,7 +170,7 @@ export function PortfolioSection() {
                 <div className="mt-6">
                   <button 
                     onClick={() => {
-                      window.open('https://payhip.com/midzerohub', '_blank');
+                      window.open('https://t.me/+1vH_j9h-myowZjQ0', '_blank');
                     }}
                     className="w-full sm:w-auto px-8 py-3.5 bg-[#00FF66] hover:bg-[#00FF66]/90 active:scale-95 text-black font-black uppercase tracking-widest rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(0,255,102,0.3)] hover:shadow-[0_0_30px_rgba(0,255,102,0.5)] cursor-pointer flex items-center justify-center gap-2 text-xs"
                   >

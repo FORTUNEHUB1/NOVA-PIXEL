@@ -10,7 +10,7 @@ import BlogList from './pages/BlogList';
 import BlogPostPage from './pages/BlogPost';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
-import { PortfolioSection } from './PortfolioSection';
+import PortfolioSection from './PortfolioSection';
 import ChatbotWidget from './ChatbotWidget';
 
 export default function App() {

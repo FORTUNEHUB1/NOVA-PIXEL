@@ -5,6 +5,7 @@ import { auth, googleProvider, db } from '../firebase';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { motion } from 'motion/react';
 import { KeyRound, Mail, AlertCircle, Loader2 } from 'lucide-react';
+import heroBgVideo from '../assets/videos/hero-bg.mp4';
 
 // Help log security access
 async function logAuthEvent(email: string, success: boolean, action: string, uid?: string) {
@@ -94,7 +95,7 @@ export default function Login() {
         playsInline 
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       >
-        <source src={`${import.meta.env.BASE_URL}hero-bg.mp4`} type="video/mp4" />
+        <source src={heroBgVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 

@@ -3,14 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence, useTransform, useMotionValue, useSpring } from 'motion/react';
 import { Menu, X, ArrowRight, ArrowUpRight, PhoneOff, Mic, Video, FileText, Pencil, MoreHorizontal } from 'lucide-react';
 import { CoverFlowHero } from '../components/CoverFlowHero';
-import { CrmDashboardMockup } from '../components/CrmDashboardMockup';
-import aboutBgVideo from '../assets/klickpin-spa.mp4';
+import PortfolioSection from '../PortfolioSection';
+import aboutBgVideo from '../assets/videos/about-bg.mp4';
+import heroVideoNew from '../assets/videos/hero-video-new.mp4';
+import sideVideo from '../assets/videos/side-video.mp4';
 import avatarBg from '../assets/images/regenerated_image_1784470233249.jpg';
 import project1Img from '../assets/images/regenerated_image_1784374184659.png';
 import project2Img from '../assets/images/regenerated_image_1780574266646.jpg';
 import project3Img from '../assets/images/regenerated_image_1780574269455.jpg';
-import androidBg from '../assets/images/android-bg-2.jpg';
+import androidBg from '../assets/images/android-bg-new.jpg';
+import homeHeroBg from '../assets/images/home-hero-bg.jpg';
 
+import newSectionBg from '../assets/images/new-section-bg.jpg';
 import { FaTiktok, FaPinterest, FaInstagram, FaYoutube, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 
 export default function Home({ handleGatedLink }: { handleGatedLink: (url: string) => void }) {
@@ -79,7 +83,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       <section 
         className="relative min-h-screen overflow-hidden bg-[#181818] flex items-end justify-start pb-16 md:pb-24 pt-32"
         style={{ 
-          backgroundImage: `url(${androidBg})`, 
+          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newSectionBg})`, 
           backgroundSize: 'cover', 
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -93,7 +97,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           playsInline 
           className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-20 mix-blend-screen"
         >
-          <source src={`${import.meta.env.BASE_URL}hero-video-new.mp4`} type="video/mp4" />
+          <source src={heroVideoNew} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
@@ -184,7 +188,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                   muted 
                   playsInline 
                   className="w-full h-[40%] object-cover rounded-2xl border border-white/10 shadow-inner"
-                  src={`${import.meta.env.BASE_URL}side-video.mp4`}
+                  src={sideVideo}
                 />
 
                 {/* Floating self-avatar image (PIP) inside the video call frame */}
@@ -274,70 +278,19 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             </div>
           </div>
           
-          {/* CRM Dashboard UI Integration */}
+          {/* Portfolio Section Integration */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="w-full mt-12 z-40 relative"
+            className="w-full mt-12 z-40 relative rounded-3xl overflow-hidden shadow-2xl border border-white/10"
           >
-            <CrmDashboardMockup />
+            <PortfolioSection embedded={true} />
           </motion.div>
         </div>
       </section>
 
-      {/* About Summary */}
-      <section className="relative py-32 md:py-48 px-6 md:px-12 overflow-hidden bg-black text-white" style={{ minHeight: '430px' }}>
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none"
-        >
-          <source src={`${import.meta.env.BASE_URL}about-bg.mp4`} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-        <motion.div 
-          className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 justify-center items-center relative z-10 p-12 rounded-3xl transition-all duration-300"
-          initial="initial"
-          whileInView="whileInView"
-          viewport={reveal3D.viewport}
-          variants={reveal3D}
-          transition={reveal3D.transition}
-        >
-          <div className="flex-shrink-0 pt-2 md:pt-4 relative z-20 flex flex-col items-center gap-8">
-            <div className="flex flex-wrap gap-4 items-center justify-center">
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/40 backdrop-blur-md border border-white/20 hover:bg-black/60 hover:scale-110 transition-all shadow-lg shadow-black/20">
-                <FaTiktok className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023]/60 backdrop-blur-md border border-white/20 hover:bg-[#E60023]/80 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20">
-                <FaPinterest className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433]/70 via-[#dc2743]/70 to-[#bc1888]/70 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
-                <FaInstagram className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000]/60 backdrop-blur-md border border-white/20 hover:bg-[#FF0000]/80 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
-                <FaYoutube className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2]/60 backdrop-blur-md border border-white/20 hover:bg-[#1877F2]/80 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
-                <FaFacebook className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366]/60 backdrop-blur-md border border-white/20 hover:bg-[#25D366]/80 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
-                <FaWhatsapp className="w-7 h-7" />
-              </a>
-            </div>
 
-            <button 
-              onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")} 
-              className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/40 bg-white/10 backdrop-blur-md text-white rounded-full px-8 py-4 hover:bg-white/20 hover:border-white active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all duration-300 cursor-pointer shadow-sm"
-            >
-              More about us 
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </motion.div>
-      </section>
 
       {/* Marquee */}
       <div className="w-full bg-white/10 dark:bg-black/20 backdrop-blur-xl text-white py-6 overflow-hidden flex items-center border-y border-white/20 shadow-2xl relative z-20 -mt-[100px]">
@@ -386,7 +339,10 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       </div>
 
       {/* Publications */}
-      <section className="py-20 border-t border-[#ddd] dark:border-white/10 bg-[#F0F0EE] dark:bg-[#111] transition-colors duration-500">
+      <section 
+        className="py-20 border-t border-[#ddd] dark:border-white/10 bg-[#F0F0EE] dark:bg-[#111] transition-colors duration-500 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newSectionBg})` }}
+      >
         <motion.div 
           className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center"
           initial="initial"
@@ -397,6 +353,49 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
         >
           <p className="text-xs font-bold uppercase tracking-widest text-[#666] dark:text-zinc-400 mb-8 font-sans">Features & Publications</p>
           <div className="text-6xl font-black tracking-[0.2em] uppercase text-[#111] dark:text-white transition-colors">DRUM</div>
+
+          <div className="flex-shrink-0 pt-16 relative z-20 flex flex-col items-center gap-8">
+            <div className="flex flex-wrap gap-4 items-center justify-center">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-black/10">
+                <FaTiktok className="w-7 h-7" />
+              </a>
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023] dark:bg-[#E60023]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20">
+                <FaPinterest className="w-7 h-7" />
+              </a>
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] dark:from-[#f09433]/70 dark:via-[#dc2743]/70 dark:to-[#bc1888]/70 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
+                <FaInstagram className="w-7 h-7" />
+              </a>
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000] dark:bg-[#FF0000]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
+                <FaYoutube className="w-7 h-7" />
+              </a>
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2] dark:bg-[#1877F2]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
+                <FaFacebook className="w-7 h-7" />
+              </a>
+              <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366] dark:bg-[#25D366]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
+                <FaWhatsapp className="w-7 h-7" />
+              </a>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <button 
+                onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")} 
+                className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-[#111]/20 dark:border-white/40 bg-white/50 dark:bg-white/10 backdrop-blur-md text-[#111] dark:text-white rounded-full px-8 py-4 hover:bg-white dark:hover:bg-white/20 hover:border-[#111] dark:hover:border-white active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all duration-300 cursor-pointer shadow-sm"
+              >
+                More about us 
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+              
+              <button 
+                onClick={() => {
+                  window.open('https://t.me/+1vH_j9h-myowZjQ0', '_blank');
+                }}
+                className="flex items-center gap-2 text-sm font-black uppercase tracking-widest bg-[#00FF66] text-black rounded-full px-8 py-4 hover:bg-[#00FF66]/90 active:scale-95 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,102,0.3)] hover:shadow-[0_0_40px_rgba(0,255,102,0.5)] cursor-pointer"
+              >
+                GET IT
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </motion.div>
       </section>
 
@@ -442,6 +441,21 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             >
               <p className="text-xs font-bold uppercase tracking-widest text-[#666] mb-4">SERVICES</p>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-[#111]">What we’re good at</h2>
+              <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+                <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] inline-flex items-center justify-center text-white bg-[#25D366] hover:bg-[#25D366]/80 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/40">
+                  <FaWhatsapp className="w-7 h-7" />
+                </a>
+                
+                <button 
+                  onClick={() => {
+                    window.open('https://t.me/+1vH_j9h-myowZjQ0', '_blank');
+                  }}
+                  className="flex items-center gap-2 text-sm font-black uppercase tracking-widest bg-[#00FF66] text-black rounded-full px-8 py-4 hover:bg-[#00FF66]/90 active:scale-95 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,102,0.3)] hover:shadow-[0_0_40px_rgba(0,255,102,0.5)] cursor-pointer"
+                >
+                  GET IT
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              </div>
             </motion.div>
             
             <div className="md:w-2/3 flex flex-col">
@@ -729,7 +743,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 <div className="pt-8">
                   <button 
                     onClick={() => {
-                      window.open('https://payhip.com/midzerohub', '_blank');
+                      window.open('https://t.me/+1vH_j9h-myowZjQ0', '_blank');
                     }}
                     className="w-full py-4 bg-[#00FF66] hover:bg-[#00FF66]/90 active:scale-95 text-black font-black uppercase tracking-widest rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(0,255,102,0.3)] hover:shadow-[0_0_40px_rgba(0,255,102,0.5)] cursor-pointer flex items-center justify-center gap-2 text-sm"
                   >
