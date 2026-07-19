@@ -94,7 +94,7 @@ export default function Login() {
         playsInline 
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src={`${import.meta.env.BASE_URL}hero-bg.mp4`} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 

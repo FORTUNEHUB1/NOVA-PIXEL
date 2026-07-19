@@ -9,6 +9,7 @@ import avatarBg from '../assets/images/regenerated_image_1784470233249.jpg';
 import project1Img from '../assets/images/regenerated_image_1784374184659.png';
 import project2Img from '../assets/images/regenerated_image_1780574266646.jpg';
 import project3Img from '../assets/images/regenerated_image_1780574269455.jpg';
+import androidBg from '../assets/images/android-bg-2.jpg';
 
 import { FaTiktok, FaPinterest, FaInstagram, FaYoutube, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 
@@ -78,7 +79,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       <section 
         className="relative min-h-screen overflow-hidden bg-[#181818] flex items-end justify-start pb-16 md:pb-24 pt-32"
         style={{ 
-          backgroundImage: "url('/android-bg-2.jpg')", 
+          backgroundImage: `url(${androidBg})`, 
           backgroundSize: 'cover', 
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -92,7 +93,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           playsInline 
           className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-20 mix-blend-screen"
         >
-          <source src="/hero-video-new.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}hero-video-new.mp4`} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
@@ -183,7 +184,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                   muted 
                   playsInline 
                   className="w-full h-[40%] object-cover rounded-2xl border border-white/10 shadow-inner"
-                  src="/side-video.mp4"
+                  src={`${import.meta.env.BASE_URL}side-video.mp4`}
                 />
 
                 {/* Floating self-avatar image (PIP) inside the video call frame */}
@@ -294,7 +295,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           playsInline 
           className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none"
         >
-          <source src="/about-bg.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}about-bg.mp4`} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/10 pointer-events-none" />
         <motion.div 

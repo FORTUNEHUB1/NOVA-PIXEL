@@ -29,22 +29,22 @@ export function PortfolioSection() {
   const [selectedProject, setSelectedProject] = useState<{title: string, tech: string[], category: string, img: string, desc: string} | null>(null);
 
   const projects = [
-    { title: "Marketing", tech: ["Digital", "SEO", "Growth"], category: "Marketing", img: marketingImg, desc: "Comprehensive digital marketing strategies." },
-    { title: "Video Editing", tech: ["Premiere", "After Effects", "Color"], category: "Media", img: imgRegen1782991348023, desc: "Professional, high-impact video production." },
-    { title: "Web App Development", tech: ["React", "Node.js", "Full-Stack"], category: "Web", img: imgRegen1782991351706, desc: "Scalable and robust full-stack applications." },
-    { title: "AI Content Creation", tech: ["Midjourney", "GPT-4", "Prompting"], category: "AI", img: aiContentImg, desc: "Next-generation AI content generation." },
-    { title: "Crypto Trading", tech: ["Analysis", "Algorithms", "Markets"], category: "Trading", img: cryptoTradingImg, desc: "Advanced market analysis & automated trading." },
-    { title: "AI Tools", tech: ["LLMs", "Automation", "Workflows"], category: "AI", img: aiToolsImg, desc: "Custom toolchains leveraging AI." },
-    { title: "AI Automation System", tech: ["Python", "OpenAI", "Zapier"], category: "AI", img: imgRegen1782991354539, desc: "End-to-end business automation." },
-    { title: "Forex Trading Bot", tech: ["MQL4", "Python", "API"], category: "Trading", img: imgRegenerated1778939110589, desc: "High-frequency FX trading bot." },
-    { title: "Telegram Tools & Bots", tech: ["Node.js", "Telegraf", "MongoDB"], category: "Bots", img: imgRegen1782991355625, desc: "Custom community management." },
-    { title: "Digital Product Markets", tech: ["React", "Stripe", "NextJS"], category: "Web", img: imgRegenerated1778939099473, desc: "E-commerce for digital assets." },
-    { title: "Canva Template Collections", tech: ["Design", "Canva", "UI/UX"], category: "Design", img: imgRegen1782991361628, desc: "Premium aesthetic templates." },
-    { title: "Course Platforms", tech: ["LMS", "React", "Video"], category: "Web", img: imgRegen1782991356356, desc: "Custom video course hosting." },
-    { title: "Conversion Landing Pages", tech: ["Tailwind", "Framer", "React"], category: "Web", img: imgRegenerated1778953720833, desc: "High-converting sales pages." },
-    { title: "Membership Systems", tech: ["Auth0", "Stripe", "Next.JS"], category: "Web", img: imgRegenerated1778939119586, desc: "Exclusive community access." },
-    { title: "Portfolio Websites", tech: ["React", "Motion", "Tailwind"], category: "Web", img: imgRegen1782991358653, desc: "Showcasing creative talent." },
-    { title: "AI Tool Dashboards", tech: ["Vue", "Tailwind", "Python API"], category: "AI", img: imgRegenerated1778953529894, desc: "Analytics & AI prompt interfaces." },
+    { title: "Marketing", tech: ["Digital", "SEO", "Growth"], category: "Marketing", img: marketingImg, desc: "A robust digital ecosystem tailored for hyper-growth, leveraging advanced SEO strategies and data-driven marketing campaigns to amplify brand reach." },
+    { title: "Video Editing", tech: ["Premiere", "After Effects", "Color"], category: "Media", img: imgRegen1782991348023, desc: "High-end visual storytelling featuring cinematic color grading, dynamic motion graphics, and seamless transitions for maximum audience engagement." },
+    { title: "Web App Development", tech: ["React", "Node.js", "Full-Stack"], category: "Web", img: imgRegen1782991351706, desc: "A highly responsive, state-of-the-art web application architecture engineered for scalability, seamless user journeys, and robust performance." },
+    { title: "AI Content Creation", tech: ["Midjourney", "GPT-4", "Prompting"], category: "AI", img: aiContentImg, desc: "Pioneering the intersection of art and algorithm with AI-generated visual and textual content, optimizing creative workflows exponentially." },
+    { title: "Crypto Trading", tech: ["Analysis", "Algorithms", "Markets"], category: "Trading", img: cryptoTradingImg, desc: "An institutional-grade algorithmic trading dashboard built to analyze blockchain metrics and execute high-frequency crypto market strategies." },
+    { title: "AI Tools", tech: ["LLMs", "Automation", "Workflows"], category: "AI", img: aiToolsImg, desc: "A customized suite of intelligent micro-tools utilizing Large Language Models to automate repetitive cognitive tasks and data structuring." },
+    { title: "AI Automation System", tech: ["Python", "OpenAI", "Zapier"], category: "AI", img: imgRegen1782991354539, desc: "A seamless enterprise automation pipeline linking critical APIs to autonomous AI agents for zero-touch operational efficiency." },
+    { title: "Forex Trading Bot", tech: ["MQL4", "Python", "API"], category: "Trading", img: imgRegenerated1778939110589, desc: "A meticulously backtested foreign exchange trading algorithm incorporating real-time sentiment analysis and rapid execution protocols." },
+    { title: "Telegram Tools & Bots", tech: ["Node.js", "Telegraf", "MongoDB"], category: "Bots", img: imgRegen1782991355625, desc: "An interactive, highly concurrent community management bot ecosystem delivering instant automated moderation and bespoke user tools." },
+    { title: "Digital Product Markets", tech: ["React", "Stripe", "NextJS"], category: "Web", img: imgRegenerated1778939099473, desc: "A frictionless e-commerce platform specifically optimized for instant digital asset delivery, complete with secure payment gateways." },
+    { title: "Canva Template Collections", tech: ["Design", "Canva", "UI/UX"], category: "Design", img: imgRegen1782991361628, desc: "A curated repository of premium, brand-ready visual templates designed for high conversion and immediate aesthetic impact." },
+    { title: "Course Platforms", tech: ["LMS", "React", "Video"], category: "Web", img: imgRegen1782991356356, desc: "An immersive digital learning environment featuring secure video hosting, interactive modules, and personalized student progress tracking." },
+    { title: "Conversion Landing Pages", tech: ["Tailwind", "Framer", "React"], category: "Web", img: imgRegenerated1778953720833, desc: "Psychology-driven landing page designs utilizing precise typography and fluid animations to dramatically increase funnel conversion rates." },
+    { title: "Membership Systems", tech: ["Auth0", "Stripe", "Next.JS"], category: "Web", img: imgRegenerated1778939119586, desc: "A secure, multi-tiered subscription portal granting exclusive access to gated premium content and tight-knit community forums." },
+    { title: "Portfolio Websites", tech: ["React", "Motion", "Tailwind"], category: "Web", img: imgRegen1782991358653, desc: "A sleek, motion-rich personal brand showcase designed to display creative works in a visually striking, memorable interactive format." },
+    { title: "AI Tool Dashboards", tech: ["Vue", "Tailwind", "Python API"], category: "AI", img: imgRegenerated1778953529894, desc: "A centralized, intuitive command center connecting diverse analytical APIs and AI prompt generators into one unified user interface." },
   ];
 
   const filteredProjects = projects.filter(p => {
