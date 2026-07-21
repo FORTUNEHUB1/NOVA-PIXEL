@@ -13,8 +13,7 @@ import project2Img from '../assets/images/regenerated_image_1780574266646.jpg';
 import project3Img from '../assets/images/regenerated_image_1780574269455.jpg';
 import androidBg from '../assets/images/android-bg-new.jpg';
 import homeHeroBg from '../assets/images/home-hero-bg.jpg';
-
-import newSectionBg from '../assets/images/new-section-bg.jpg';
+import newBg from '../assets/images/new-bg.jpg';
 import { FaTiktok, FaPinterest, FaInstagram, FaYoutube, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 
 export default function Home({ handleGatedLink }: { handleGatedLink: (url: string) => void }) {
@@ -83,7 +82,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       <section 
         className="relative min-h-screen overflow-hidden bg-[#181818] flex items-end justify-start pb-16 md:pb-24 pt-32"
         style={{ 
-          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newSectionBg})`, 
+          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newBg})`, 
           backgroundSize: 'cover', 
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -341,7 +340,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       {/* Publications */}
       <section 
         className="py-20 border-t border-[#ddd] dark:border-white/10 bg-[#F0F0EE] dark:bg-[#111] transition-colors duration-500 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newSectionBg})` }}
+        style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newBg})` }}
       >
         <motion.div 
           className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center"
