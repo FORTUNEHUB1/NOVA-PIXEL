@@ -60,14 +60,16 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
 
   return (
     <section 
-      className={`${embedded ? 'pt-8 pb-12 min-h-[600px] rounded-3xl' : 'pt-32 pb-24 min-h-screen border-t border-zinc-200 dark:border-white/5'} bg-zinc-100 dark:bg-[#080808] relative z-20 bg-cover bg-center bg-no-repeat`}
-      style={{ backgroundImage: `linear-gradient(to bottom, rgba(8,8,8,0.7), rgba(8,8,8,0.9)), url(${androidBg})` }}
+      className={`${embedded ? 'pt-8 pb-12 min-h-[600px] rounded-3xl' : 'pt-32 pb-24 min-h-screen border-t border-white/10'} bg-transparent relative z-20 bg-grid-wallpaper`}
     >
       <div className={`${embedded ? 'max-w-full px-6' : 'max-w-7xl mx-auto px-6 lg:px-12'}`}>
         <div className="flex flex-col gap-2 mb-10">
-          <span className="text-blue-500 font-bold tracking-widest uppercase text-[10px]">04 // Innovation Hub</span>
-          <h2 className="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Portfolio Projects</h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base max-w-xl mt-4">Discover our diverse range of high-performance digital solutions, from automated trading systems to customized educational platforms.</p>
+          <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+            04 // Innovation Hub
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">Portfolio Projects</h2>
+          <p className="text-zinc-400 text-sm md:text-base max-w-xl mt-4">Discover our diverse range of high-performance digital solutions, from automated trading systems to customized educational platforms.</p>
         </div>
         
         {/* Search Bar */}
@@ -79,7 +81,7 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
               placeholder="Search by title, skill, or category..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 rounded-full py-4 pl-12 pr-6 text-zinc-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shadow-sm"
+              className="w-full bg-black/60 backdrop-blur-xl border border-white/20 rounded-full py-4 pl-12 pr-6 text-white placeholder:text-zinc-500 font-medium focus:outline-none focus:border-[#00FF66] focus:ring-2 focus:ring-[#00FF66]/30 transition-all shadow-xl"
             />
           </div>
         </div>
@@ -96,23 +98,23 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
                 transition={{ duration: 0.2 }}
                 whileHover={{ y: -8 }}
                 onClick={() => setSelectedProject(p)}
-                className="group relative bg-[#111] dark:bg-zinc-900 border border-zinc-800 dark:border-white/5 rounded-2xl overflow-hidden cursor-pointer shadow-xl"
+                className="group relative bg-zinc-950/70 border border-white/15 hover:border-[#00FF66]/50 rounded-2xl overflow-hidden cursor-pointer shadow-2xl backdrop-blur-md transition-all duration-300"
               >
                 <div className="h-56 overflow-hidden relative">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111]/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent"></div>
                 </div>
-                <div className="p-6 relative z-10 -mt-20">
+                <div className="p-6 relative z-10 -mt-16">
                   <div className="flex gap-2 flex-wrap mb-4">
                     {p.tech.map((t, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-white/10 backdrop-blur-md rounded border border-white/20 text-[8px] font-bold text-white uppercase tracking-wider">{t}</span>
+                      <span key={idx} className="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-md border border-white/20 text-[9px] font-bold text-white uppercase tracking-wider">{t}</span>
                     ))}
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors uppercase">{p.title}</h3>
-                  <p className="text-white/80 text-xs font-medium">{p.desc}</p>
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#00FF66] transition-colors uppercase">{p.title}</h3>
+                  <p className="text-zinc-300 text-xs font-medium line-clamp-2 leading-relaxed">{p.desc}</p>
                 </div>
                 
-                <div className="absolute inset-0 border-2 border-blue-500/0 group-hover:border-blue-500/50 rounded-2xl transition-colors pointer-events-none"></div>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#00FF66]/40 rounded-2xl transition-colors pointer-events-none"></div>
               </motion.div>
             ))}
           </AnimatePresence>
@@ -133,37 +135,37 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/85 backdrop-blur-md"
             />
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-3xl bg-zinc-100 dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row border border-zinc-200 dark:border-zinc-800"
+              className="relative w-full max-w-3xl bg-zinc-950/95 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/20 bg-grid-wallpaper"
             >
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-black/80 text-white rounded-full backdrop-blur-md transition-colors"
+                className="absolute top-4 right-4 z-20 p-2 bg-black/60 hover:bg-white hover:text-black text-white rounded-full backdrop-blur-md transition-colors border border-white/20"
               >
                 <X className="w-5 h-5" />
               </button>
               
               <div className="w-full md:w-1/2 h-64 md:h-auto relative">
                 <img src={selectedProject.img} alt={selectedProject.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent md:bg-gradient-to-r md:from-transparent md:to-zinc-100 dark:md:to-zinc-900"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent md:bg-gradient-to-r md:from-transparent md:to-zinc-950"></div>
               </div>
               
               <div className="w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
                 <div className="flex gap-2 flex-wrap mb-6">
                   {selectedProject.tech.map((t, idx) => (
-                    <span key={idx} className="px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-full text-xs font-bold uppercase tracking-wider">{t}</span>
+                    <span key={idx} className="px-3 py-1.5 bg-[#00FF66]/10 text-[#00FF66] border border-[#00FF66]/30 rounded-full text-xs font-bold uppercase tracking-wider">{t}</span>
                   ))}
                 </div>
-                <h3 className="text-3xl font-black text-zinc-900 dark:text-white uppercase mb-4 leading-tight">{selectedProject.title}</h3>
-                <div className="inline-block bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded text-xs font-bold uppercase tracking-widest mb-6 w-max">
+                <h3 className="text-3xl font-black text-white uppercase mb-4 leading-tight">{selectedProject.title}</h3>
+                <div className="inline-block bg-[#00FF66] text-black px-3 py-1 rounded-md text-xs font-black uppercase tracking-widest mb-6 w-max">
                   {selectedProject.category}
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-300 font-medium leading-relaxed">
+                <p className="text-zinc-300 font-medium leading-relaxed">
                   {selectedProject.desc}
                 </p>
                 
@@ -179,9 +181,9 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
                   </button>
                 </div>
                 
-                <div className="mt-8 pt-8 border-t border-zinc-200 dark:border-zinc-800">
-                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-widest mb-3">Project Details</h4>
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                <div className="mt-8 pt-8 border-t border-white/10">
+                  <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-3">Project Details</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
                     This project showcases expertise in {selectedProject.category.toLowerCase()}, utilizing modern methodologies to deliver high-impact results. The implementation prioritizes performance, scalability, and an intuitive user experience.
                   </p>
                 </div>

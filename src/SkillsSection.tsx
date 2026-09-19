@@ -19,12 +19,15 @@ export function SkillsSection() {
   ];
 
   return (
-    <section className="py-24 bg-white dark:bg-[#080808] border-t border-zinc-200 dark:border-white/5 relative z-20">
+    <section className="py-24 bg-transparent border-t border-white/10 relative z-20 bg-grid-wallpaper">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col items-center text-center gap-2 mb-16">
-          <span className="text-blue-500 font-bold tracking-widest uppercase text-[10px]">03 // Technical Expertise</span>
-          <h2 className="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Core Skills</h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base max-w-xl mt-4">A visual breakdown of our specialized capabilities in the digital landscape, from high-end development to strategic content creation.</p>
+          <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+            03 // Technical Expertise
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">Core Skills</h2>
+          <p className="text-zinc-400 text-sm md:text-base max-w-xl mt-4">A visual breakdown of our specialized capabilities in the digital landscape, from high-end development to strategic content creation.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -35,26 +38,26 @@ export function SkillsSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              whileHover={{ y: -5, borderColor: "rgba(59, 130, 246, 0.5)" }}
-              className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/10 rounded-2xl p-6 transition-colors shadow-sm group"
+              whileHover={{ y: -5, borderColor: "rgba(0, 255, 102, 0.5)" }}
+              className="bg-zinc-950/70 backdrop-blur-xl border border-white/15 rounded-2xl p-6 transition-all duration-300 shadow-xl group hover:shadow-[0_0_25px_rgba(0,255,102,0.15)]"
             >
-              <div className={`w-12 h-12 rounded-xl bg-white dark:bg-black/40 flex items-center justify-center mb-4 shadow-inner border border-zinc-100 dark:border-white/5 group-hover:scale-110 transition-transform ${skill.color}`}>
+              <div className={`w-12 h-12 rounded-xl bg-black/60 flex items-center justify-center mb-4 shadow-inner border border-white/10 group-hover:scale-110 transition-transform text-[#00FF66]`}>
                 {skill.icon}
               </div>
-              <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider mb-4">{skill.name}</h3>
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4">{skill.name}</h3>
               
               <div className="space-y-2">
-                <div className="flex justify-between items-center text-[10px] font-bold text-zinc-500 dark:text-zinc-500 uppercase">
+                <div className="flex justify-between items-center text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
                   <span>Proficiency</span>
-                  <span>{skill.level}%</span>
+                  <span className="text-[#00FF66]">{skill.level}%</span>
                 </div>
-                <div className="h-1.5 w-full bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden border border-white/5">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: i * 0.1 }}
-                    className={`h-full bg-gradient-to-r from-blue-600 to-purple-600 rounded-full`}
+                    className={`h-full bg-gradient-to-r from-[#00FF66] to-[#00CC52] rounded-full shadow-[0_0_10px_rgba(0,255,102,0.5)]`}
                   />
                 </div>
               </div>

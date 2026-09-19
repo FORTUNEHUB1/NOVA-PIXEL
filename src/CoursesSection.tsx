@@ -63,12 +63,15 @@ export function CoursesSection() {
   ];
 
   return (
-    <section className="py-24 bg-white dark:bg-[#080808] border-t border-zinc-200 dark:border-white/5 relative z-20">
+    <section className="py-24 bg-transparent border-t border-white/10 relative z-20 bg-grid-wallpaper">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col items-center text-center gap-2 mb-16">
-          <span className="text-purple-500 font-bold tracking-widest uppercase text-[10px]">07 // Educational Academy</span>
-          <h2 className="text-4xl md:text-6xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Featured Courses</h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base max-w-xl mt-4">Elevate your skills with our expert-led online programs designed for real-world impact and professional growth.</p>
+          <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+            07 // Educational Academy
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">Featured Courses</h2>
+          <p className="text-zinc-400 text-sm md:text-base max-w-xl mt-4">Elevate your skills with our expert-led online programs designed for real-world impact and professional growth.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -79,31 +82,36 @@ export function CoursesSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group flex flex-col bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all shadow-md"
+              className="group flex flex-col bg-zinc-950/70 backdrop-blur-xl border border-white/15 hover:border-[#00FF66]/50 rounded-2xl overflow-hidden transition-all shadow-2xl duration-300"
             >
               <div className="relative aspect-video overflow-hidden">
                 <img src={course.img} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-md border border-white/50 rounded-full flex items-center justify-center">
-                    <Play className="w-6 h-6 text-white fill-current" />
+                  <div className="w-12 h-12 bg-[#00FF66] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,255,102,0.6)]">
+                    <Play className="w-5 h-5 text-black fill-current ml-0.5" />
                   </div>
                 </div>
               </div>
 
               <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center gap-4 text-[10px] uppercase font-bold text-zinc-500 dark:text-zinc-500 tracking-widest mb-4">
-                  <span className="flex items-center gap-1"><Star className="w-3 h-3 text-yellow-500 fill-current" /> {course.rating}</span>
-                  <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {course.students} Students</span>
-                  <span className="flex items-center gap-1 ml-auto"><Clock className="w-3 h-3" /> {course.duration}</span>
+                <div className="flex items-center gap-4 text-[10px] uppercase font-bold text-zinc-400 tracking-widest mb-4">
+                  <span className="flex items-center gap-1 text-amber-400"><Star className="w-3 h-3 fill-current" /> {course.rating}</span>
+                  <span className="flex items-center gap-1 text-zinc-400"><Users className="w-3 h-3" /> {course.students} Students</span>
+                  <span className="flex items-center gap-1 ml-auto text-[#00FF66]"><Clock className="w-3 h-3" /> {course.duration}</span>
                 </div>
 
-                <h3 className="text-lg font-black text-zinc-900 dark:text-white uppercase tracking-tight mb-3 line-clamp-1">{course.title}</h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-6 line-clamp-2 leading-relaxed flex-1">{course.desc}</p>
+                <h3 className="text-lg font-black text-white uppercase tracking-tight mb-3 line-clamp-1 group-hover:text-[#00FF66] transition-colors">{course.title}</h3>
+                <p className="text-xs text-zinc-400 mb-6 line-clamp-2 leading-relaxed flex-1">{course.desc}</p>
 
-                <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-900 dark:text-white group/link">
-                  Enroll Now <ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
-                </button>
+                <a 
+                  href="https://t.me/+1vH_j9h-myowZjQ0" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#00FF66] group/link hover:text-white transition-colors"
+                >
+                  Enroll Now <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                </a>
               </div>
             </motion.div>
           ))}
@@ -112,13 +120,14 @@ export function CoursesSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-200 dark:border-white/10 rounded-2xl p-8 text-center bg-transparent group cursor-pointer hover:border-purple-500/50 transition-colors"
+            className="flex flex-col items-center justify-center border-2 border-dashed border-white/20 rounded-2xl p-8 text-center bg-black/40 backdrop-blur-xl group cursor-pointer hover:border-[#00FF66]/60 transition-all shadow-xl"
+            onClick={() => window.open('https://t.me/+1vH_j9h-myowZjQ0', '_blank')}
           >
-             <div className="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-               <Globe className="w-8 h-8 text-purple-500" />
+             <div className="w-16 h-16 rounded-full bg-[#00FF66]/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-[#00FF66] transition-all">
+               <Globe className="w-8 h-8 text-[#00FF66] group-hover:text-black transition-colors" />
              </div>
-             <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-900 dark:text-white mb-2">View Academy</h3>
-             <p className="text-[10px] text-zinc-500 uppercase tracking-widest">Access 50+ masterclasses</p>
+             <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-2">View Academy</h3>
+             <p className="text-[10px] text-zinc-400 uppercase tracking-widest">Access 50+ masterclasses</p>
           </motion.div>
         </div>
       </div>

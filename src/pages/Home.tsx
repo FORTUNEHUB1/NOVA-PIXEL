@@ -80,13 +80,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
     <>
       {/* Hero Section */}
       <section 
-        className="relative min-h-screen overflow-hidden bg-[#181818] flex items-end justify-start pb-16 md:pb-24 pt-32"
-        style={{ 
-          backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newBg})`, 
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+        className="relative min-h-screen overflow-hidden bg-[#050505] flex items-end justify-start pb-16 md:pb-24 pt-32 bg-grid-wallpaper"
       >
         {/* Background Video */}
         <video 
@@ -94,18 +88,21 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           loop 
           muted 
           playsInline 
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-20 mix-blend-screen"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-25 mix-blend-screen"
         >
           <source src={heroVideoNew} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
 
         {/* Content wrapper */}
         <div className="relative z-30 flex flex-col items-start text-left px-6 md:px-12 lg:px-20 w-full max-w-[1600px] mx-auto pb-10">
           <div className="flex flex-col lg:flex-row w-full items-center lg:items-center justify-between gap-12 lg:gap-8">
             <div className="w-full lg:w-1/2 flex flex-col items-start">
-              <span className="text-xs md:text-sm font-bold text-white/70 tracking-widest mb-3 uppercase">BLACKPIXEL</span>
+              <span className="text-xs md:text-sm font-bold text-[#00FF66] tracking-widest mb-3 uppercase flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+                BLACKPIXEL STUDIO
+              </span>
               
               <motion.div 
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -114,12 +111,12 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 className="relative mb-8 flex flex-col items-start drop-shadow-2xl"
               >
                 <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.8)] leading-none tracking-tighter pb-1 hover:bg-clip-text hover:bg-gradient-to-r hover:from-white hover:to-white/70 transition-all duration-500 text-left"
+                  className="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-none tracking-tighter pb-1 text-left drop-shadow-[0_0_35px_rgba(255,255,255,0.2)]"
                 >
                   Creativity
                 </motion.h1>
                 <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-6xl font-black text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.8)] leading-none tracking-tighter -mt-[2px] text-left pb-1 hover:bg-clip-text hover:bg-gradient-to-r hover:from-white hover:to-white/70 transition-all duration-500"
+                  className="text-4xl md:text-5xl lg:text-7xl font-black text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.9)] leading-none tracking-tighter -mt-[2px] text-left pb-1 hover:bg-clip-text hover:bg-gradient-to-r hover:from-white hover:to-[#00FF66] transition-all duration-500"
                 >
                   That Actually<br/>Pays Off
                 </motion.h1>
@@ -129,29 +126,29 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                className="flex flex-wrap gap-2 md:gap-3 items-center justify-start bg-white/5 backdrop-blur-xl border border-white/20 p-2 md:p-2.5 rounded-full shadow-[0_0_40px_rgba(255,255,255,0.15),inset_0_0_20px_rgba(255,255,255,0.1)] max-w-full overflow-x-auto scrollbar-hide relative group"
+                className="flex flex-wrap gap-2 md:gap-3 items-center justify-start bg-black/60 backdrop-blur-2xl border border-white/20 p-2 md:p-2.5 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.8)] max-w-full overflow-x-auto scrollbar-hide relative group"
               >
                 <button 
                   onClick={() => handleGatedLink("https://payhip.com/midzerohub")}
-                  className="px-6 md:px-8 py-3 bg-[#FA1594]/80 text-white rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#FF3BA6]/90 transition-all cursor-pointer whitespace-nowrap shadow-[0_0_15px_rgba(250,21,148,0.5)] hover:shadow-[0_0_25px_rgba(250,21,148,0.8)]"
+                  className="px-6 md:px-8 py-3 bg-[#FA1594] text-white rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#FF3BA6] transition-all cursor-pointer whitespace-nowrap shadow-[0_0_20px_rgba(250,21,148,0.6)] hover:shadow-[0_0_30px_rgba(250,21,148,0.9)] active:scale-95"
                 >
                   Market
                 </button>
                 <button 
                   onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")}
-                  className="px-6 md:px-8 py-3 bg-[#229ED9]/80 text-white rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#1C82B3]/90 transition-all cursor-pointer whitespace-nowrap shadow-[0_0_15px_rgba(34,158,217,0.5)] hover:shadow-[0_0_25px_rgba(34,158,217,0.8)]"
+                  className="px-6 md:px-8 py-3 bg-[#229ED9] text-white rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#1C82B3] transition-all cursor-pointer whitespace-nowrap shadow-[0_0_20px_rgba(34,158,217,0.6)] hover:shadow-[0_0_30px_rgba(34,158,217,0.9)] active:scale-95"
                 >
                   Telegram
                 </button>
                 <button 
                   onClick={() => handleGatedLink("https://whop.com/fortune-digital-hub")}
-                  className="px-6 md:px-8 py-3 bg-[#FF6243]/80 text-white rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#E54A2D]/90 transition-all cursor-pointer whitespace-nowrap shadow-[0_0_15px_rgba(255,98,67,0.5)] hover:shadow-[0_0_25px_rgba(255,98,67,0.8)]"
+                  className="px-6 md:px-8 py-3 bg-[#FF6243] text-white rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#E54A2D] transition-all cursor-pointer whitespace-nowrap shadow-[0_0_20px_rgba(255,98,67,0.6)] hover:shadow-[0_0_30px_rgba(255,98,67,0.9)] active:scale-95"
                 >
                   Whop
                 </button>
                 <button 
                   onClick={() => navigate('/portfolio')}
-                  className="px-6 md:px-8 py-3 bg-[#00FF66]/80 text-black rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#00E55C]/90 transition-all cursor-pointer whitespace-nowrap shadow-[0_0_15px_rgba(0,255,102,0.5)] hover:shadow-[0_0_25px_rgba(0,255,102,0.8)]"
+                  className="px-6 md:px-8 py-3 bg-[#00FF66] text-black rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#00E55C] transition-all cursor-pointer whitespace-nowrap shadow-[0_0_20px_rgba(0,255,102,0.6)] hover:shadow-[0_0_35px_rgba(0,255,102,0.9)] active:scale-95"
                 >
                   Skill
                 </button>
@@ -177,7 +174,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                     ease: "easeInOut"
                   }
                 }}
-                className="relative w-[280px] sm:w-[320px] aspect-[9/16] rounded-[2.5rem] p-4 flex flex-col justify-between overflow-hidden shadow-[0_0_60px_rgba(255,255,255,0.1),-20px_20px_40px_rgba(0,0,0,0.5)] border-4 border-white/10 bg-black/60 backdrop-blur-md"
+                className="relative w-[280px] sm:w-[320px] aspect-[9/16] rounded-[2.5rem] p-4 flex flex-col justify-between overflow-hidden shadow-[0_0_60px_rgba(0,255,102,0.15),-20px_20px_50px_rgba(0,0,0,0.9)] border-4 border-white/20 bg-zinc-950/80 backdrop-blur-xl bg-grid-wallpaper"
                 style={{ transformStyle: 'preserve-3d' }}
               >
                 {/* The video element remains a direct child of this div to preserve CSS targeting */}
@@ -186,7 +183,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                   loop 
                   muted 
                   playsInline 
-                  className="w-full h-[40%] object-cover rounded-2xl border border-white/10 shadow-inner"
+                  className="w-full h-[40%] object-cover rounded-2xl border border-white/20 shadow-inner"
                   src={sideVideo}
                 />
 
@@ -197,7 +194,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                     title: "Self View Studio Portrait", 
                     desc: "An ultra-premium, AI-enhanced professional studio portrait capturing detailed lighting, clean tones, and authentic expression."
                   })}
-                  className="absolute top-[65px] right-4 w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] rounded-2xl overflow-hidden border-2 border-white/30 shadow-2xl z-20 hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
+                  className="absolute top-[65px] right-4 w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] rounded-2xl overflow-hidden border-2 border-white/40 shadow-2xl z-20 hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
                 >
                   <img 
                     src={avatarBg} 
@@ -210,11 +207,11 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 {/* Video call controls overlay (positioned absolutely over the video region) */}
                 <div className="absolute top-4 left-4 right-4 h-[40%] flex flex-col justify-between p-3 pointer-events-none z-10">
                   <div className="flex justify-between items-center">
-                    <span className="bg-black/40 backdrop-blur-md text-[10px] text-white font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="bg-black/70 backdrop-blur-md text-[10px] text-white font-medium px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-white/10">
                       <span className="w-1.5 h-1.5 bg-[#00FF66] rounded-full animate-pulse"></span>
                       Jonah Jude
                     </span>
-                    <span className="bg-black/40 backdrop-blur-md text-[10px] text-white/90 font-medium px-2 py-0.5 rounded-full">
+                    <span className="bg-black/70 backdrop-blur-md text-[10px] text-white/90 font-medium px-2.5 py-1 rounded-full border border-white/10">
                       36 min
                     </span>
                   </div>
@@ -232,41 +229,41 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 </div>
 
                 {/* Summary Card */}
-                <div className="w-full bg-white/95 backdrop-blur-md text-slate-800 p-3.5 rounded-2xl shadow-lg border border-white/20 transition-all hover:scale-[1.02] duration-300">
+                <div className="w-full bg-zinc-900/90 backdrop-blur-xl text-zinc-100 p-3.5 rounded-2xl shadow-xl border border-white/15 transition-all hover:scale-[1.02] duration-300">
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center gap-1.5">
                       <div className="w-2.5 h-2.5 bg-[#00FF66] rounded-full"></div>
-                      <span className="text-xs font-black uppercase tracking-wider text-slate-900">Summary</span>
+                      <span className="text-xs font-black uppercase tracking-wider text-white">Summary</span>
                     </div>
-                    <button className="text-slate-400 hover:text-slate-600">
+                    <button className="text-zinc-400 hover:text-white">
                       <Pencil size={11} />
                     </button>
                   </div>
                   
-                  <span className="text-[9px] font-bold tracking-widest text-slate-400 uppercase block mb-1.5">Documents:</span>
+                  <span className="text-[9px] font-bold tracking-widest text-zinc-400 uppercase block mb-1.5">Documents:</span>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-slate-50 border border-slate-100 p-2 rounded-xl flex flex-col justify-between min-h-[50px] relative hover:bg-slate-100/50 transition-all cursor-pointer">
+                    <div className="bg-black/60 border border-white/10 p-2 rounded-xl flex flex-col justify-between min-h-[50px] relative hover:bg-white/10 transition-all cursor-pointer">
                       <FileText size={16} className="text-[#FF7A59] mb-1" />
-                      <span className="text-[10px] font-black text-slate-800 tracking-tight truncate">Brief.pdf</span>
-                      <span className="text-[8px] text-slate-400 font-medium">9.4 MB</span>
+                      <span className="text-[10px] font-black text-white tracking-tight truncate">Brief.pdf</span>
+                      <span className="text-[8px] text-zinc-400 font-medium">9.4 MB</span>
                     </div>
-                    <div className="bg-slate-50 border border-slate-100 p-2 rounded-xl flex flex-col justify-between min-h-[50px] relative hover:bg-slate-100/50 transition-all cursor-pointer">
+                    <div className="bg-black/60 border border-white/10 p-2 rounded-xl flex flex-col justify-between min-h-[50px] relative hover:bg-white/10 transition-all cursor-pointer">
                       <FileText size={16} className="text-[#229ED9] mb-1" />
-                      <span className="text-[10px] font-black text-slate-800 tracking-tight truncate">Specs.pdf</span>
-                      <span className="text-[8px] text-slate-400 font-medium">12.1 MB</span>
+                      <span className="text-[10px] font-black text-white tracking-tight truncate">Specs.pdf</span>
+                      <span className="text-[8px] text-zinc-400 font-medium">12.1 MB</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Goal Card */}
-                <div className="w-full bg-white/5 border border-white/10 p-3 rounded-2xl shadow-inner relative overflow-hidden transition-all hover:bg-white/10 duration-300">
+                <div className="w-full bg-black/60 border border-white/15 p-3 rounded-2xl shadow-inner relative overflow-hidden transition-all hover:bg-white/10 duration-300">
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-xs font-bold text-white">Goal:</span>
                     <button className="text-white/40 hover:text-white/60">
                       <Pencil size={11} />
                     </button>
                   </div>
-                  <p className="text-[10px] leading-relaxed text-gray-300 tracking-tight">
+                  <p className="text-[10px] leading-relaxed text-zinc-300 tracking-tight">
                     Reduce security incidents by <strong className="text-[#00FF66]">50%</strong>. This goal is quantitative, measurable, and highly impactful.
                   </p>
                 </div>
@@ -282,17 +279,15 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="w-full mt-12 z-40 relative rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+            className="w-full mt-12 z-40 relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/40 backdrop-blur-xl"
           >
             <PortfolioSection embedded={true} />
           </motion.div>
         </div>
       </section>
 
-
-
       {/* Marquee */}
-      <div className="w-full bg-white/10 dark:bg-black/20 backdrop-blur-xl text-white py-6 overflow-hidden flex items-center border-y border-white/20 shadow-2xl relative z-20 -mt-[100px]">
+      <div className="w-full bg-black/70 backdrop-blur-2xl text-white py-6 overflow-hidden flex items-center border-y border-white/15 shadow-2xl relative z-20 -mt-[100px] bg-grid-wallpaper">
         <motion.div
           variants={marqueeVariants}
           animate="animate"
@@ -339,8 +334,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
       {/* Publications */}
       <section 
-        className="py-20 border-t border-[#ddd] dark:border-white/10 bg-[#F0F0EE] dark:bg-[#111] transition-colors duration-500 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${newBg})` }}
+        className="py-20 border-t border-white/10 bg-transparent text-white relative bg-grid-wallpaper"
       >
         <motion.div 
           className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center"
@@ -350,27 +344,27 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           variants={reveal3D}
           transition={reveal3D.transition}
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#666] dark:text-zinc-400 mb-8 font-sans">Features & Publications</p>
-          <div className="text-6xl font-black tracking-[0.2em] uppercase text-[#111] dark:text-white transition-colors">DRUM</div>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-8 font-sans">Features & Publications</p>
+          <div className="text-6xl font-black tracking-[0.2em] uppercase text-white transition-colors drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">DRUM</div>
 
           <div className="flex-shrink-0 pt-16 relative z-20 flex flex-col items-center gap-8">
             <div className="flex flex-wrap gap-4 items-center justify-center">
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-black/10">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/60 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg hover:border-[#00FF66]/60 hover:shadow-[0_0_20px_rgba(0,255,102,0.3)]">
                 <FaTiktok className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023] dark:bg-[#E60023]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20 hover:shadow-[#E60023]/50">
                 <FaPinterest className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] dark:from-[#f09433]/70 dark:via-[#dc2743]/70 dark:to-[#bc1888]/70 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433]/80 via-[#dc2743]/80 to-[#bc1888]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
                 <FaInstagram className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000] dark:bg-[#FF0000]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
                 <FaYoutube className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2] dark:bg-[#1877F2]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
                 <FaFacebook className="w-7 h-7" />
               </a>
-              <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366] dark:bg-[#25D366]/60 backdrop-blur-md border border-black/10 dark:border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
+              <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
                 <FaWhatsapp className="w-7 h-7" />
               </a>
             </div>
@@ -378,7 +372,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <button 
                 onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")} 
-                className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-[#111]/20 dark:border-white/40 bg-white/50 dark:bg-white/10 backdrop-blur-md text-[#111] dark:text-white rounded-full px-8 py-4 hover:bg-white dark:hover:bg-white/20 hover:border-[#111] dark:hover:border-white active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all duration-300 cursor-pointer shadow-sm"
+                className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/20 bg-black/60 backdrop-blur-md text-white rounded-full px-8 py-4 hover:bg-white/10 hover:border-[#00FF66]/60 active:bg-[#00FF66] active:text-black transition-all duration-300 cursor-pointer shadow-lg"
               >
                 More about us 
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -388,7 +382,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 onClick={() => {
                   window.open('https://t.me/+1vH_j9h-myowZjQ0', '_blank');
                 }}
-                className="flex items-center gap-2 text-sm font-black uppercase tracking-widest bg-[#00FF66] text-black rounded-full px-8 py-4 hover:bg-[#00FF66]/90 active:scale-95 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,102,0.3)] hover:shadow-[0_0_40px_rgba(0,255,102,0.5)] cursor-pointer"
+                className="flex items-center gap-2 text-sm font-black uppercase tracking-widest bg-[#00FF66] text-black rounded-full px-8 py-4 hover:bg-[#00FF66]/90 active:scale-95 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,102,0.4)] hover:shadow-[0_0_45px_rgba(0,255,102,0.7)] cursor-pointer"
               >
                 GET IT
                 <ArrowUpRight className="w-4 h-4" />
@@ -399,7 +393,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       </section>
 
       {/* What We Do */}
-      <section className="py-24 md:py-40 px-6 md:px-12 bg-[#111] text-[#F0F0EE]">
+      <section className="py-24 md:py-40 px-6 md:px-12 bg-transparent text-white border-t border-white/10 bg-grid-wallpaper">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
           <motion.div
             initial="initial"
@@ -408,8 +402,8 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             variants={revealLeft3D}
             transition={revealLeft3D.transition}
           >
-            <p className="text-xs font-bold uppercase tracking-widest text-[#888] mb-6">What we do</p>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Where strategy<br/>meets creativity</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-6">What we do</p>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">Where strategy<br/>meets creativity</h2>
           </motion.div>
           <motion.div 
             className="flex items-end"
@@ -419,7 +413,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             variants={revealRight3D}
             transition={revealRight3D.transition}
           >
-            <p className="text-xl md:text-2xl font-medium tracking-tight text-[#CCC] leading-snug">
+            <p className="text-xl md:text-2xl font-medium tracking-tight text-zinc-300 leading-snug bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/10">
               Unlock your potential with premium digital products and high-performance trading EAs. Ready to take your trading to the next level? Join our Telegram community, explore exclusive offers on Whop, and get instant access to premium digital products and powerful trading EAs on Market
             </p>
           </motion.div>
@@ -427,7 +421,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       </section>
 
       {/* SERVICES */}
-      <section className="py-24 md:py-40 px-6 md:px-12 bg-white transition-colors duration-500 relative overflow-hidden">
+      <section className="py-24 md:py-40 px-6 md:px-12 bg-transparent border-t border-white/10 text-white relative overflow-hidden bg-grid-wallpaper">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex flex-col md:flex-row gap-16">
             <motion.div 
@@ -438,8 +432,8 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               variants={revealLeft3D}
               transition={revealLeft3D.transition}
             >
-              <p className="text-xs font-bold uppercase tracking-widest text-[#666] mb-4">SERVICES</p>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-[#111]">What we’re good at</h2>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-4">SERVICES</p>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">What we’re good at</h2>
               <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
                 <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] inline-flex items-center justify-center text-white bg-[#25D366] hover:bg-[#25D366]/80 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/40">
                   <FaWhatsapp className="w-7 h-7" />
@@ -470,14 +464,14 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               ].map((service, idx) => (
                 <motion.div 
                   key={idx} 
-                  className="group border-b border-[#ddd] flex justify-between items-center py-6 md:py-8 cursor-pointer hover:px-4 hover:bg-[#F0F0EE]/80 transition-all duration-300 backdrop-blur-sm"
+                  className="group border-b border-white/10 flex justify-between items-center py-6 md:py-8 cursor-pointer hover:px-6 hover:bg-white/5 hover:border-[#00FF66]/50 rounded-2xl transition-all duration-300 backdrop-blur-sm"
                   initial={{ opacity: 0, rotateX: -20, y: 20, transformPerspective: 1000 }}
                   whileInView={{ opacity: 1, rotateX: 0, y: 0, transformPerspective: 1000 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" as any }}
                 >
-                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-[#111] transition-colors">{service}</h3>
-                  <ArrowUpRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transform translate-x-[-20px] group-hover:translate-x-0 transition-all duration-300 text-[#111]" />
+                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-white group-hover:text-[#00FF66] transition-colors">{service}</h3>
+                  <ArrowUpRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transform translate-x-[-20px] group-hover:translate-x-0 transition-all duration-300 text-[#00FF66]" />
                 </motion.div>
               ))}
             </div>
@@ -486,7 +480,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       </section>
 
       {/* Partners */}
-      <section className="py-24 border-t border-[#ddd] dark:border-white/10 bg-[#F0F0EE] dark:bg-[#111] transition-colors duration-500">
+      <section className="py-24 border-t border-white/10 bg-transparent text-white transition-colors duration-500 bg-grid-wallpaper">
         <motion.div 
           className="max-w-7xl mx-auto px-6 md:px-12"
           initial="initial"
@@ -495,20 +489,20 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           variants={reveal3D}
           transition={reveal3D.transition}
         >
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-[#666] dark:text-zinc-400 mb-12">Partners / Trusted by forward-thinking brands</p>
-          <div className="flex flex-col items-center justify-center opacity-30 dark:opacity-50 gap-8">
-             <div className="flex flex-wrap justify-center gap-12 md:gap-24 text-[#111] dark:text-white transition-colors font-sans">
-                <span className="text-3xl font-black uppercase">Brand1</span>
-                <span className="text-3xl font-black uppercase">Brand2</span>
-                <span className="text-3xl font-black uppercase">Brand3</span>
-                <span className="text-3xl font-black uppercase">Brand4</span>
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-12">Partners / Trusted by forward-thinking brands</p>
+          <div className="flex flex-col items-center justify-center opacity-60 gap-8">
+             <div className="flex flex-wrap justify-center gap-12 md:gap-24 text-white transition-colors font-sans">
+                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand1</span>
+                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand2</span>
+                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand3</span>
+                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand4</span>
              </div>
           </div>
         </motion.div>
       </section>
 
       {/* Works Intro */}
-      <section className="pt-24 md:pt-40 px-6 md:px-12 bg-white pb-16">
+      <section className="pt-24 md:pt-40 px-6 md:px-12 bg-transparent text-white pb-16 border-t border-white/10 bg-grid-wallpaper">
         <motion.div 
           className="max-w-4xl mx-auto flex flex-col gap-8 text-center items-center"
           initial="initial"
@@ -517,23 +511,23 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           variants={reveal3D}
           transition={reveal3D.transition}
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#666]">Works</p>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66]">Works</p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight text-white">
             This is how we do business. Our brand strategists integrate business, marketing, communications, analytics, and design to convey authentic, meaningful, and unique brands.
           </h2>
-          <p className="text-xl md:text-2xl font-medium text-[#666] max-w-3xl">
+          <p className="text-xl md:text-2xl font-medium text-zinc-400 max-w-3xl">
             We believe details make the difference; we'll introduce your brand innovatively, creatively, and comprehensively to the audience. We'll get your brand to communicate with the target customer's subconscious and leave an imprint for the future.
           </p>
         </motion.div>
       </section>
 
       {/* Projects */}
-      <section className="bg-white px-6 md:px-12 pb-40">
-        <div className="max-w-7xl mx-auto flex flex-col border-t border-[#ddd] pt-24">
+      <section className="bg-transparent px-6 md:px-12 pb-40 text-white bg-grid-wallpaper">
+        <div className="max-w-7xl mx-auto flex flex-col border-t border-white/10 pt-24">
           
           {/* Project 1 */}
           <motion.div 
-            className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-32 items-center"
+            className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-32 items-center bg-zinc-950/60 p-8 lg:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-xl"
             initial="initial"
             whileInView="whileInView"
             viewport={reveal3D.viewport}
@@ -546,7 +540,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 title: "LIVV Audio App", 
                 desc: "Our state-of-the-art interactive audio application designed for supreme user experience and premium sound delivery. Built with React and advanced motion libraries."
               })}
-              className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-[#EAEAEA] rounded-3xl cursor-pointer" 
+              className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-zinc-900 rounded-3xl cursor-pointer border border-white/15 shadow-2xl" 
               style={{ transformStyle: 'preserve-3d' }}
             >
               <motion.img 
@@ -559,20 +553,20 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               />
             </div>
             <div className="w-full lg:w-1/2 flex flex-col items-start gap-8">
-              <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">LIVV Audio App</h3>
-              <div className="space-y-4 text-sm font-medium text-[#666] tracking-tight border-l-2 border-[#111] pl-6 py-2">
-                <p><strong className="text-[#111] uppercase tracking-widest text-xs">Credits:</strong></p>
+              <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">LIVV Audio App</h3>
+              <div className="space-y-4 text-sm font-medium text-zinc-300 tracking-tight border-l-2 border-[#00FF66] pl-6 py-2">
+                <p><strong className="text-[#00FF66] uppercase tracking-widest text-xs">Credits:</strong></p>
                 <p>UI/UX Designer: Koryun Mkhitaryan</p>
                 <p>Project Manager: Tatev Hakobyan</p>
                 <p>Creative Director: Elen Gasparyan</p>
               </div>
-              <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#111] pb-1 hover:text-[#666] hover:border-[#666] transition-colors mt-4">See more &gt;&gt;</a>
+              <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#00FF66] pb-1 text-white hover:text-[#00FF66] transition-colors mt-4">See more &gt;&gt;</a>
             </div>
           </motion.div>
 
           {/* Project 2 */}
           <motion.div 
-            className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-24 mb-32 items-center"
+            className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-24 mb-32 items-center bg-zinc-950/60 p-8 lg:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-xl"
             initial="initial"
             whileInView="whileInView"
             viewport={reveal3D.viewport}
@@ -585,7 +579,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 title: "Branding for Mezcal Apeña", 
                 desc: "A premium mezcal brand design centered around tradition, quality, and female empowerment. Featuring custom agave patterns, illustrative silhouettes, and elegant visual branding."
               })}
-              className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-[#EAEAEA] rounded-3xl cursor-pointer" 
+              className="w-full lg:w-1/2 overflow-hidden aspect-[4/3] bg-zinc-900 rounded-3xl cursor-pointer border border-white/15 shadow-2xl" 
               style={{ transformStyle: 'preserve-3d' }}
             >
               <motion.img 
@@ -598,33 +592,33 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               />
             </div>
             <div className="w-full lg:w-1/2 flex flex-col items-start gap-8">
-              <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Branding for Mezcal Apeña</h3>
-              <div className="space-y-4 text-[#333] font-medium leading-relaxed">
-                <p><strong className="text-[#111] uppercase tracking-widest text-xs border-b-2 border-[#111] pb-1">About Project</strong></p>
+              <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">Branding for Mezcal Apeña</h3>
+              <div className="space-y-4 text-zinc-300 font-medium leading-relaxed">
+                <p><strong className="text-[#00FF66] uppercase tracking-widest text-xs border-b-2 border-[#00FF66] pb-1">About Project</strong></p>
                 <p className="mt-4">Mezcal Apeña is a premium mezcal brand that distinguishes itself through a deep commitment to tradition, quality, and female empowerment. As a proud female-owned enterprise, it reveres the authenticity and rich heritage of its products...</p>
                 <p><strong>Logo solution:</strong><br/>The logo combines the Mexican Woman, Agave Plant, Earrings, and Text Fragment.</p>
               </div>
               
-              <div className="grid grid-cols-2 gap-8 text-sm font-medium text-[#666] tracking-tight w-full pt-4 border-t border-[#eee]">
+              <div className="grid grid-cols-2 gap-8 text-sm font-medium text-zinc-400 tracking-tight w-full pt-4 border-t border-white/10">
                  <div>
                     <p>Date: 2024</p>
                     <p>Client: Mezcal Apeña</p>
                  </div>
                  <div>
-                    <p><strong className="text-[#111]">Credits:</strong></p>
+                    <p><strong className="text-white">Credits:</strong></p>
                     <p>Project type: Logo design</p>
                     <p>Graphic Designer: Koryun Mkhitaryan</p>
                     <p>Project Manager: Nina Hovhannisyan</p>
                  </div>
               </div>
 
-              <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#111] pb-1 hover:text-[#666] hover:border-[#666] transition-colors mt-4">See more &gt;&gt;</a>
+              <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#00FF66] pb-1 text-white hover:text-[#00FF66] transition-colors mt-4">See more &gt;&gt;</a>
             </div>
           </motion.div>
 
           {/* Project 3 */}
           <motion.div 
-            className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center mb-24"
+            className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center mb-24 bg-zinc-950/60 p-8 lg:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-xl"
             initial="initial"
             whileInView="whileInView"
             viewport={reveal3D.viewport}
@@ -637,7 +631,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                 title: "Waunt: Integrated marketing campaign", 
                 desc: "An elite skincare advertising campaign targeting Gen Z audiences. Merging high-contrast typography, interactive motion graphics, and rich brand storytelling across multiple social mediums."
               })}
-              className="w-full lg:w-1/2 overflow-hidden aspect-square bg-[#EAEAEA] rounded-3xl cursor-pointer" 
+              className="w-full lg:w-1/2 overflow-hidden aspect-square bg-zinc-900 rounded-3xl cursor-pointer border border-white/15 shadow-2xl" 
               style={{ transformStyle: 'preserve-3d' }}
             >
               <motion.img 
@@ -650,18 +644,18 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               />
             </div>
             <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
-              <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Waunt: Integrated marketing campaign</h3>
-              <p className="text-[#333] font-medium leading-relaxed text-lg">
+              <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">Waunt: Integrated marketing campaign</h3>
+              <p className="text-zinc-300 font-medium leading-relaxed text-lg">
                 BLACKPIXEL creative agency recently had the honor of partnering with Oriflame, a globally renowned brand with a presence in over 60 countries. The task at hand was no easy feat - to launch and advertise their new line of WAUNT products specifically targeted towards the female Gen Z audience in Armenia...
               </p>
-              <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#111] pb-1 hover:text-[#666] hover:border-[#666] transition-colors mt-4">See more &gt;&gt;</a>
+              <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#00FF66] pb-1 text-white hover:text-[#00FF66] transition-colors mt-4">See more &gt;&gt;</a>
             </div>
           </motion.div>
 
           <div className="flex justify-center pt-12">
             <button 
               onClick={() => handleGatedLink("https://payhip.com/midzerohub")}
-              className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-[#111]/20 bg-[#111]/5 backdrop-blur-md rounded-full px-12 py-5 hover:bg-[#111]/10 text-[#111] active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all duration-300 cursor-pointer shadow-sm"
+              className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/20 bg-black/60 backdrop-blur-xl rounded-full px-12 py-5 hover:bg-white/10 text-white hover:border-[#00FF66]/60 active:bg-[#00FF66] active:text-black transition-all duration-300 cursor-pointer shadow-lg"
             >
               Discover all 
             </button>

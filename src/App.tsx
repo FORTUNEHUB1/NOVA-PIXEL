@@ -77,29 +77,29 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-gray-900 selection:text-white transition-colors duration-500">
+      <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00FF66] selection:text-black bg-grid-wallpaper relative">
         {/* Navigation */}
         <nav className="absolute top-0 left-0 w-full z-50">
-          <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
-            <Link to="/" className="text-2xl font-black tracking-tighter uppercase text-gray-900 bg-white/30 backdrop-blur-md px-4 py-2 rounded-xl border border-white/40 shadow-sm hover:bg-white/40 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all">BLACKPIXEL</Link>
+          <div className="max-w-7xl mx-auto px-6 md:px-8 py-6 flex justify-between items-center">
+            <Link to="/" className="text-2xl font-black tracking-tighter uppercase text-white bg-black/60 backdrop-blur-xl px-5 py-2.5 rounded-2xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)] hover:border-[#00FF66]/60 hover:shadow-[0_0_25px_rgba(0,255,102,0.3)] active:bg-[#00FF66] active:text-black transition-all">BLACKPIXEL</Link>
             
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8 font-medium text-gray-900 bg-white/30 backdrop-blur-md px-6 py-2 rounded-full border border-white/40 shadow-sm active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all">
-              <Link to="/" className="hover:text-gray-700 transition-colors">Start</Link>
-              <Link to="/blog" className="hover:text-gray-700 transition-colors">Blog</Link>
-              {user && <Link to="/admin" className="hover:text-gray-700 transition-colors font-bold">Admin</Link>}
+            <div className="hidden md:flex items-center gap-8 font-medium text-zinc-300 bg-black/60 backdrop-blur-xl px-7 py-2.5 rounded-full border border-white/15 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+              <Link to="/" className="hover:text-[#00FF66] transition-colors">Start</Link>
+              <Link to="/blog" className="hover:text-[#00FF66] transition-colors">Blog</Link>
+              {user && <Link to="/admin" className="hover:text-[#00FF66] transition-colors font-bold text-white">Admin</Link>}
             </div>
 
             <div className="flex items-center gap-4">
               {!user ? (
-                <Link to="/login" className="hidden sm:block text-sm font-medium text-gray-900 border border-white/40 bg-white/30 backdrop-blur-md px-6 py-2 rounded-full hover:bg-white/50 hover:text-gray-900 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all shadow-sm">Sign In</Link>
+                <Link to="/login" className="hidden sm:block text-sm font-bold text-white border border-white/20 bg-black/60 backdrop-blur-xl px-6 py-2.5 rounded-full hover:bg-white/10 hover:border-[#00FF66]/60 hover:shadow-[0_0_20px_rgba(0,255,102,0.25)] active:bg-[#00FF66] active:text-black transition-all shadow-md">Sign In</Link>
               ) : (
-                <button onClick={handleSignOut} className="hidden sm:block text-sm font-medium text-red-600 bg-white/30 backdrop-blur-md border border-white/40 px-6 py-2 rounded-full hover:bg-white/50 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all shadow-sm">Logout</button>
+                <button onClick={handleSignOut} className="hidden sm:block text-sm font-bold text-red-400 bg-black/60 backdrop-blur-xl border border-red-500/30 px-6 py-2.5 rounded-full hover:bg-red-500/20 hover:border-red-500/60 transition-all shadow-md">Logout</button>
               )}
               
               {/* Mobile Menu Button */}
               <button 
-                className="md:hidden text-gray-900 p-2 bg-white/30 backdrop-blur-md border border-white/40 rounded-full shadow-sm hover:bg-white/40 active:bg-[#00FF66]/40 active:border-[#00FF66] active:shadow-[0_0_40px_#00FF66,inset_0_0_20px_#00FF66] transition-all"
+                className="md:hidden text-white p-2.5 bg-black/60 backdrop-blur-xl border border-white/20 rounded-full shadow-md hover:bg-white/10 active:bg-[#00FF66] active:text-black transition-all"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle Menu"
               >
@@ -112,10 +112,10 @@ export default function App() {
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
           <div className="md:hidden fixed top-24 left-4 right-4 z-[60]">
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex flex-col p-6 gap-6 text-lg font-medium text-gray-900 border border-white/20">
-              <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-gray-600 transition-colors">Start</Link>
-              <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-gray-600 transition-colors">Blog</Link>
-              {user && <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="font-bold hover:text-gray-600 transition-colors">Admin</Link>}
+            <div className="bg-[#0c0d0e]/95 backdrop-blur-2xl rounded-2xl shadow-2xl flex flex-col p-6 gap-6 text-lg font-medium text-white border border-white/20 bg-grid-wallpaper">
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-[#00FF66] transition-colors">Start</Link>
+              <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-[#00FF66] transition-colors">Blog</Link>
+              {user && <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="font-bold text-[#00FF66] hover:text-white transition-colors">Admin</Link>}
             </div>
           </div>
         )}
@@ -131,8 +131,8 @@ export default function App() {
           </Routes>
         </main>
 
-        <footer className="bg-[#111] text-[#F0F0EE] py-24 px-6 md:px-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none text-[20vw] font-black leading-none uppercase translate-x-1/4 -translate-y-1/4 mix-blend-overlay">
+        <footer className="bg-[#080808]/95 border-t border-white/10 text-[#F0F0EE] py-24 px-6 md:px-12 relative overflow-hidden bg-grid-wallpaper">
+          <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none text-[20vw] font-black leading-none uppercase translate-x-1/4 -translate-y-1/4 mix-blend-overlay text-white">
             BLACKPIXEL
           </div>
           <motion.div 
@@ -145,24 +145,24 @@ export default function App() {
             <h2 className="text-[12vw] sm:text-[10vw] font-black tracking-tighter uppercase leading-[0.8] text-white">
               Bring it on!
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-[#333] pt-12 text-sm text-[#999] font-medium leading-relaxed">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-white/10 pt-12 text-sm text-zinc-400 font-medium leading-relaxed">
               <div>
-                <p className="mb-4 text-white font-bold uppercase tracking-widest">About</p>
+                <p className="mb-4 text-white font-bold uppercase tracking-widest text-xs">About</p>
                 <p>Ⓒ BLACKPIXEL Creative Agency,<br/>2017 - {new Date().getFullYear()} | All rights reserved.</p>
               </div>
               <div className="flex flex-col gap-2">
-                <p className="mb-2 text-white font-bold uppercase tracking-widest">Legal</p>
-                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-white transition-colors">Terms and Conditions</a>
-                <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
-                <a href="#" className="hover:text-white transition-colors">Accessibility Statement</a>
+                <p className="mb-2 text-white font-bold uppercase tracking-widest text-xs">Legal</p>
+                <a href="#" className="hover:text-[#00FF66] transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-[#00FF66] transition-colors">Terms and Conditions</a>
+                <a href="#" className="hover:text-[#00FF66] transition-colors">Cookie Policy</a>
+                <a href="#" className="hover:text-[#00FF66] transition-colors">Accessibility Statement</a>
               </div>
               <div>
-                <p className="mb-4 text-white font-bold uppercase tracking-widest">Glendale Address:</p>
+                <p className="mb-4 text-white font-bold uppercase tracking-widest text-xs">Glendale Address:</p>
                 <p>655 North Central Ave 17th Floor,<br/>Glendale, CA 91203</p>
               </div>
               <div>
-                <p className="mb-4 text-white font-bold uppercase tracking-widest">Burbank Address:</p>
+                <p className="mb-4 text-white font-bold uppercase tracking-widest text-xs">Burbank Address:</p>
                 <p>40 E Verdugo Street, Ste 114<br/>Burbank, CA 91502</p>
               </div>
             </div>

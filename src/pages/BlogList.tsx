@@ -58,15 +58,19 @@ export default function BlogList() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 min-h-screen">
+    <div className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-24 min-h-screen text-white">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center mb-16"
       >
-        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6">Our Blog</h1>
-        <p className="text-xl text-[#666] dark:text-zinc-400 max-w-2xl mx-auto font-medium">
-          Insights, thoughts, and updates on digital products, trading, and AI.
+        <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs mb-3 inline-flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+          BLACKPIXEL JOURNAL
+        </span>
+        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">Our Blog</h1>
+        <p className="text-xl text-zinc-400 max-w-2xl mx-auto font-medium">
+          Insights, thoughts, and updates on digital products, trading algorithms, and cutting-edge creative tech.
         </p>
       </motion.div>
 
@@ -79,8 +83,8 @@ export default function BlogList() {
               onClick={() => setSelectedCategory(category)}
               className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${
                 selectedCategory === category 
-                  ? 'bg-[#111] text-white dark:bg-white dark:text-black' 
-                  : 'border border-gray-300 dark:border-zinc-700 hover:border-[#111] dark:hover:border-white'
+                  ? 'bg-[#00FF66] text-black shadow-[0_0_20px_rgba(0,255,102,0.4)]' 
+                  : 'border border-white/20 bg-black/50 text-white hover:border-[#00FF66]/60 hover:bg-white/10'
               }`}
             >
               {category}
@@ -89,24 +93,24 @@ export default function BlogList() {
         </div>
 
         {/* Search */}
-        <div className="relative w-full md:w-72 bg-white/20 dark:bg-zinc-900/20 backdrop-blur-md rounded-full border border-white/30 dark:border-zinc-700/50 shadow-lg focus-within:shadow-[0_0_20px_rgba(0,255,102,0.3)] transition-all">
+        <div className="relative w-full md:w-72 bg-black/60 backdrop-blur-xl rounded-full border border-white/20 shadow-xl focus-within:border-[#00FF66] focus-within:shadow-[0_0_25px_rgba(0,255,102,0.3)] transition-all">
           <input
             type="text"
             placeholder="SEARCH..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-transparent border-none rounded-full px-5 py-3 pl-12 text-sm uppercase tracking-widest font-bold focus:outline-none text-gray-900 dark:text-white placeholder-gray-500"
+            className="w-full bg-transparent border-none rounded-full px-5 py-3 pl-12 text-sm uppercase tracking-widest font-bold focus:outline-none text-white placeholder:text-zinc-500"
           />
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-zinc-400" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
         </div>
       </div>
 
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#111] dark:border-white"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00FF66]"></div>
         </div>
       ) : filteredPosts.length === 0 ? (
-        <div className="text-center py-20 text-gray-500 font-bold uppercase tracking-widest">
+        <div className="text-center py-20 text-zinc-500 font-bold uppercase tracking-widest">
           No posts found.
         </div>
       ) : (
@@ -117,32 +121,32 @@ export default function BlogList() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="group flex flex-col bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="group flex flex-col bg-zinc-950/70 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/15 shadow-2xl hover:border-[#00FF66]/50 transition-all duration-300 transform hover:-translate-y-1"
             >
-              <Link to={`/blog/${post.id}`} className="block relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-zinc-800">
+              <Link to={`/blog/${post.id}`} className="block relative aspect-[16/10] overflow-hidden bg-zinc-900">
                 {post.featuredImage ? (
                   <img src={post.featuredImage} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-300 dark:text-zinc-700">No Image</div>
+                  <div className="w-full h-full flex items-center justify-center text-zinc-600">No Image</div>
                 )}
                 {post.category && (
-                  <div className="absolute top-4 left-4 bg-white/90 dark:bg-black/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                  <div className="absolute top-4 left-4 bg-[#00FF66] text-black px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md">
                     {post.category}
                   </div>
                 )}
               </Link>
               
               <div className="p-6 flex flex-col flex-grow">
-                <p className="text-[10px] font-bold text-gray-500 dark:text-zinc-400 mb-3 tracking-widest uppercase">
+                <p className="text-[10px] font-bold text-zinc-400 mb-3 tracking-widest uppercase">
                   {post.publishedAt ? format(post.publishedAt.toDate(), 'MMMM d, yyyy') : format(post.createdAt.toDate(), 'MMMM d, yyyy')} • By {post.authorName}
                 </p>
                 <Link to={`/blog/${post.id}`}>
-                  <h2 className="text-2xl font-black uppercase tracking-tighter leading-tight mb-3 group-hover:text-[#FA1594] transition-colors">{post.title}</h2>
+                  <h2 className="text-2xl font-black uppercase tracking-tighter leading-tight mb-3 text-white group-hover:text-[#00FF66] transition-colors">{post.title}</h2>
                 </Link>
-                <p className="text-gray-600 dark:text-zinc-400 text-sm mb-6 flex-grow line-clamp-3">
+                <p className="text-zinc-400 text-sm mb-6 flex-grow line-clamp-3 leading-relaxed">
                   {post.excerpt}
                 </p>
-                <Link to={`/blog/${post.id}`} className="mt-auto text-xs font-bold uppercase tracking-widest border-b-2 border-[#111] dark:border-white pb-1 inline-flex self-start group-hover:border-[#FA1594] transition-colors">
+                <Link to={`/blog/${post.id}`} className="mt-auto text-xs font-bold uppercase tracking-widest border-b-2 border-[#00FF66] text-[#00FF66] pb-1 inline-flex self-start hover:text-white hover:border-white transition-colors">
                   Read More
                 </Link>
               </div>
