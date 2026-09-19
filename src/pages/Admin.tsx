@@ -247,12 +247,18 @@ export default function Admin({ user, isAuthLoading = false }: AdminProps) {
   if (!user || (!loading && !isAdmin)) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6 text-center">
-        <div className="bg-white dark:bg-zinc-900 p-12 rounded-3xl shadow-xl border border-gray-200 dark:border-zinc-800">
-          <h2 className="text-3xl font-black uppercase text-[#111] dark:text-white">Admin Access Restricted</h2>
-          <p className="mt-4 text-gray-500 font-medium mb-8">
-            {!user ? "Please sign in to access the admin dashboard." : "Access Denied. You do not have administrator privileges."}
+        <div className="bg-zinc-950/90 backdrop-blur-2xl p-10 md:p-12 rounded-3xl shadow-2xl border border-white/20 flex flex-col items-center max-w-lg">
+          <img 
+            src="/blackcard-logo.jpg" 
+            alt="BLACKCARD Official Logo" 
+            className="w-16 h-16 rounded-2xl object-contain bg-black border border-white/25 shadow-xl mb-6" 
+          />
+          <span className="text-xs font-black uppercase tracking-widest text-[#00FF66] mb-2">BLACKCARD Security</span>
+          <h2 className="text-3xl font-black uppercase text-white">Admin Access Restricted</h2>
+          <p className="mt-4 text-zinc-300 font-medium mb-8">
+            {!user ? "Please sign in to access the BLACKCARD admin dashboard." : "Access Denied. You do not have administrator privileges."}
           </p>
-          <a href="/login" className="px-8 py-4 bg-[#FA1594] text-white rounded-full font-black uppercase tracking-widest text-sm inline-block hover:scale-105 transition-transform">
+          <a href="/login" className="px-8 py-4 bg-[#FA1594] hover:bg-[#FF3BA6] text-white rounded-full font-black uppercase tracking-widest text-sm inline-block hover:scale-105 transition-transform shadow-lg">
             Go to Login
           </a>
         </div>
@@ -263,30 +269,41 @@ export default function Admin({ user, isAuthLoading = false }: AdminProps) {
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 min-h-screen">
       <div className="flex justify-end mb-8">
-        <div className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-full px-4 py-2 shadow-sm">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#FA1594] to-[#229ED9] flex items-center justify-center text-white font-bold text-xs">
+        <div className="flex items-center gap-3 bg-zinc-950/80 backdrop-blur-xl border border-white/20 rounded-full px-4 py-2 shadow-lg">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#FA1594] to-[#00FF66] flex items-center justify-center text-black font-bold text-xs">
             {user?.email?.charAt(0).toUpperCase() || 'A'}
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#111] dark:text-white leading-tight">
+            <span className="text-xs font-bold uppercase tracking-widest text-white leading-tight">
               {user?.displayName || 'Administrator'}
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-gray-500 font-medium">
+            <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-medium">
               {user?.email}
             </span>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-gray-200 dark:border-zinc-800 pb-8 gap-6">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#111] dark:text-white">Admin Dashboard</h1>
-          <p className="text-sm font-bold uppercase tracking-widest text-[#FA1594] mt-2">Manage Blog Posts</p>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-white/15 pb-8 gap-6">
+        <div className="flex items-center gap-4">
+          <img 
+            src="/blackcard-logo.jpg" 
+            alt="BLACKCARD Official Logo" 
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-contain bg-black border border-white/20 shadow-xl flex-shrink-0" 
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-black tracking-widest uppercase text-[#00FF66]">BLACKCARD</span>
+              <span className="text-xs text-zinc-400 font-bold uppercase tracking-wider">• Control Center</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter text-white">Admin Dashboard</h1>
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-widest text-[#FA1594] mt-1">Manage Blog Posts</p>
+          </div>
         </div>
         {!isEditing && (
           <button 
             onClick={() => setIsEditing(true)}
-            className="flex items-center gap-2 bg-[#111] text-white dark:bg-white dark:text-black px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform"
+            className="flex items-center gap-2 bg-[#00FF66] text-black px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest hover:scale-105 transition-transform shadow-lg cursor-pointer"
           >
             <Plus className="w-4 h-4" /> New Post
           </button>

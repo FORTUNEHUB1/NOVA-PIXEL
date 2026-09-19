@@ -77,11 +77,32 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00FF66] selection:text-black bg-grid-wallpaper relative">
+      <div className="min-h-screen text-white font-sans selection:bg-[#00FF66] selection:text-black relative">
+        {/* Fullscreen Fixed Zoomed-Out Background - crystal clear with no dimming overlays */}
+        <div 
+          className="fixed inset-0 w-full h-full -z-20 pointer-events-none"
+          style={{ 
+            backgroundImage: "url('/5.jpg')",
+            backgroundSize: "contain",
+            backgroundRepeat: "repeat",
+            backgroundPosition: "center top"
+          }}
+        />
+
         {/* Navigation */}
         <nav className="absolute top-0 left-0 w-full z-50">
           <div className="max-w-7xl mx-auto px-6 md:px-8 py-6 flex justify-between items-center">
-            <Link to="/" className="text-2xl font-black tracking-tighter uppercase text-white bg-black/60 backdrop-blur-xl px-5 py-2.5 rounded-2xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)] hover:border-[#00FF66]/60 hover:shadow-[0_0_25px_rgba(0,255,102,0.3)] active:bg-[#00FF66] active:text-black transition-all">BLACKPIXEL</Link>
+            <Link 
+              to="/" 
+              className="flex items-center gap-3 bg-black/75 backdrop-blur-xl px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)] hover:border-[#00FF66]/60 hover:shadow-[0_0_25px_rgba(0,255,102,0.3)] active:bg-[#00FF66] active:text-black transition-all group"
+            >
+              <img 
+                src="/blackcard-logo.jpg" 
+                alt="BLACKCARD Official Logo" 
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain bg-black flex-shrink-0 group-hover:scale-105 transition-transform" 
+              />
+              <span className="text-xl sm:text-2xl font-black tracking-tighter uppercase text-white">BLACKCARD</span>
+            </Link>
             
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 font-medium text-zinc-300 bg-black/60 backdrop-blur-xl px-7 py-2.5 rounded-full border border-white/15 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
@@ -113,6 +134,10 @@ export default function App() {
         {isMenuOpen && (
           <div className="md:hidden fixed top-24 left-4 right-4 z-[60]">
             <div className="bg-[#0c0d0e]/95 backdrop-blur-2xl rounded-2xl shadow-2xl flex flex-col p-6 gap-6 text-lg font-medium text-white border border-white/20 bg-grid-wallpaper">
+              <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+                <img src="/blackcard-logo.jpg" alt="BLACKCARD Logo" className="w-8 h-8 rounded-lg object-contain bg-black border border-white/15" />
+                <span className="font-black text-xl tracking-tighter uppercase text-white">BLACKCARD</span>
+              </div>
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-[#00FF66] transition-colors">Start</Link>
               <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-[#00FF66] transition-colors">Blog</Link>
               {user && <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="font-bold text-[#00FF66] hover:text-white transition-colors">Admin</Link>}
@@ -131,38 +156,52 @@ export default function App() {
           </Routes>
         </main>
 
-        <footer className="bg-[#080808]/95 border-t border-white/10 text-[#F0F0EE] py-24 px-6 md:px-12 relative overflow-hidden bg-grid-wallpaper">
+        <footer className="bg-black/90 backdrop-blur-2xl border-t border-white/20 text-[#F0F0EE] py-24 px-6 md:px-12 relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none text-[20vw] font-black leading-none uppercase translate-x-1/4 -translate-y-1/4 mix-blend-overlay text-white">
-            BLACKPIXEL
+            BLACKCARD
           </div>
           <motion.div 
-            className="max-w-7xl mx-auto flex flex-col gap-24 relative z-10"
-            initial={{ opacity: 0, y: 50, rotateX: -20, scale: 0.95, transformPerspective: 1000 }}
-            whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1, transformPerspective: 1000 }}
+            className="max-w-7xl mx-auto flex flex-col gap-16 relative z-10"
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <img 
+                  src="/blackcard-logo.jpg" 
+                  alt="BLACKCARD Official Logo" 
+                  className="w-12 h-12 rounded-xl object-contain bg-black border border-white/20 shadow-lg" 
+                />
+                <div>
+                  <h3 className="text-2xl font-black uppercase tracking-tighter text-white">BLACKCARD</h3>
+                  <p className="text-xs font-bold tracking-widest uppercase text-[#00FF66]">Creative Agency & Market</p>
+                </div>
+              </div>
+            </div>
+
             <h2 className="text-[12vw] sm:text-[10vw] font-black tracking-tighter uppercase leading-[0.8] text-white">
               Bring it on!
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-white/10 pt-12 text-sm text-zinc-400 font-medium leading-relaxed">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-t border-white/15 pt-12 text-sm text-zinc-200 font-medium leading-relaxed">
               <div>
-                <p className="mb-4 text-white font-bold uppercase tracking-widest text-xs">About</p>
-                <p>Ⓒ BLACKPIXEL Creative Agency,<br/>2017 - {new Date().getFullYear()} | All rights reserved.</p>
+                <p className="mb-4 text-[#00FF66] font-bold uppercase tracking-widest text-xs">About</p>
+                <p>Ⓒ BLACKCARD Creative Agency,<br/>2017 - {new Date().getFullYear()} | All rights reserved.</p>
               </div>
               <div className="flex flex-col gap-2">
-                <p className="mb-2 text-white font-bold uppercase tracking-widest text-xs">Legal</p>
+                <p className="mb-2 text-[#00FF66] font-bold uppercase tracking-widest text-xs">Legal</p>
                 <a href="#" className="hover:text-[#00FF66] transition-colors">Privacy Policy</a>
                 <a href="#" className="hover:text-[#00FF66] transition-colors">Terms and Conditions</a>
                 <a href="#" className="hover:text-[#00FF66] transition-colors">Cookie Policy</a>
                 <a href="#" className="hover:text-[#00FF66] transition-colors">Accessibility Statement</a>
               </div>
               <div>
-                <p className="mb-4 text-white font-bold uppercase tracking-widest text-xs">Glendale Address:</p>
+                <p className="mb-4 text-[#00FF66] font-bold uppercase tracking-widest text-xs">Glendale Address:</p>
                 <p>655 North Central Ave 17th Floor,<br/>Glendale, CA 91203</p>
               </div>
               <div>
-                <p className="mb-4 text-white font-bold uppercase tracking-widest text-xs">Burbank Address:</p>
+                <p className="mb-4 text-[#00FF66] font-bold uppercase tracking-widest text-xs">Burbank Address:</p>
                 <p>40 E Verdugo Street, Ste 114<br/>Burbank, CA 91502</p>
               </div>
             </div>

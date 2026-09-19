@@ -104,9 +104,15 @@ export default function Login() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md bg-white/10 dark:bg-black/10 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-white/20 dark:border-white/10 relative z-10"
       >
-        <div className="text-center mb-10">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <img 
+            src="/blackcard-logo.jpg" 
+            alt="BLACKCARD Official Logo" 
+            className="w-16 h-16 rounded-2xl object-contain bg-black border border-white/25 shadow-2xl mb-4" 
+          />
+          <span className="text-xs font-black uppercase tracking-widest text-[#00FF66] mb-1">BLACKCARD Portal</span>
           <h1 className="text-4xl font-bold tracking-tight text-white mb-2">Login</h1>
-          <p className="text-gray-200 font-medium text-sm">Welcome back please login to your account</p>
+          <p className="text-gray-200 font-medium text-sm">Welcome back, please sign in to your account</p>
         </div>
 
         {error && (

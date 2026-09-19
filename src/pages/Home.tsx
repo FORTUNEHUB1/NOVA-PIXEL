@@ -39,26 +39,40 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
     mouseY.set(y);
   };
 
-  // 3D Reveal variants
-  const reveal3D: any = {
-    initial: { opacity: 0, y: 50, rotateX: -20, scale: 0.95, transformPerspective: 1000 },
-    whileInView: { opacity: 1, y: 0, rotateX: 0, scale: 1, transformPerspective: 1000 },
-    viewport: { once: true, amount: 0.1 },
-    transition: { duration: 1, ease: "easeOut" as any }
+  // Subtle scroll-triggered reveal variants
+  const scrollReveal: any = {
+    initial: { opacity: 0, y: 35, scale: 0.98 },
+    whileInView: { opacity: 1, y: 0, scale: 1 },
+    viewport: { once: true, amount: 0.15, margin: "-40px" },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   };
   
-  const revealLeft3D: any = {
-    initial: { opacity: 0, x: -50, rotateY: 20, transformPerspective: 1000 },
-    whileInView: { opacity: 1, x: 0, rotateY: 0, transformPerspective: 1000 },
-    viewport: { once: true, amount: 0.2 },
-    transition: { duration: 1, ease: "easeOut" as any }
+  const scrollRevealLeft: any = {
+    initial: { opacity: 0, x: -40 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.15, margin: "-40px" },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   };
   
-  const revealRight3D: any = {
-    initial: { opacity: 0, x: 50, rotateY: -20, transformPerspective: 1000 },
-    whileInView: { opacity: 1, x: 0, rotateY: 0, transformPerspective: 1000 },
+  const scrollRevealRight: any = {
+    initial: { opacity: 0, x: 40 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.15, margin: "-40px" },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+  };
+
+  const staggerContainer: any = {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    viewport: { once: true, amount: 0.15 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
+  };
+
+  const staggerItem: any = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.2 },
-    transition: { duration: 1, ease: "easeOut" as any }
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
   };
 
   // Marquee animation variants
@@ -80,45 +94,37 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
     <>
       {/* Hero Section */}
       <section 
-        className="relative min-h-screen overflow-hidden bg-[#050505] flex items-end justify-start pb-16 md:pb-24 pt-32 bg-grid-wallpaper"
+        className="relative min-h-screen overflow-hidden bg-transparent flex items-end justify-start pb-16 md:pb-24 pt-32"
       >
-        {/* Background Video */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-25 mix-blend-screen"
-        >
-          <source src={heroVideoNew} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
-
         {/* Content wrapper */}
         <div className="relative z-30 flex flex-col items-start text-left px-6 md:px-12 lg:px-20 w-full max-w-[1600px] mx-auto pb-10">
           <div className="flex flex-col lg:flex-row w-full items-center lg:items-center justify-between gap-12 lg:gap-8">
             <div className="w-full lg:w-1/2 flex flex-col items-start">
-              <span className="text-xs md:text-sm font-bold text-[#00FF66] tracking-widest mb-3 uppercase flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
-                BLACKPIXEL STUDIO
+              <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs md:text-sm font-bold text-[#00FF66] tracking-widest mb-4 uppercase inline-flex items-center gap-2.5 shadow-xl">
+                <img 
+                  src="/blackcard-logo.jpg" 
+                  alt="BLACKCARD Icon" 
+                  className="w-4 h-4 rounded object-contain bg-black" 
+                />
+                BLACKCARD STUDIO
               </span>
               
               <motion.div 
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative mb-8 flex flex-col items-start drop-shadow-2xl"
+                className="relative mb-8 flex flex-col items-start"
               >
                 <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-none tracking-tighter pb-1 text-left drop-shadow-[0_0_35px_rgba(255,255,255,0.2)]"
+                  className="text-4xl md:text-5xl lg:text-7xl font-black text-black leading-none tracking-tighter pb-1 text-left drop-shadow-sm"
                 >
                   Creativity
                 </motion.h1>
                 <motion.h1 
-                  className="text-4xl md:text-5xl lg:text-7xl font-black text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.9)] leading-none tracking-tighter -mt-[2px] text-left pb-1 hover:bg-clip-text hover:bg-gradient-to-r hover:from-white hover:to-[#00FF66] transition-all duration-500"
+                  className="text-4xl md:text-5xl lg:text-7xl font-black text-zinc-900 leading-none tracking-tighter -mt-[2px] text-left pb-1"
                 >
-                  That Actually<br/>Pays Off
+                  That Actually<br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-950 via-zinc-800 to-[#009944]">Pays Off</span>
                 </motion.h1>
               </motion.div>
               
@@ -277,9 +283,10 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           {/* Portfolio Section Integration */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="w-full mt-12 z-40 relative rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-black/40 backdrop-blur-xl"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full mt-12 z-40 relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-zinc-950/90 backdrop-blur-2xl"
           >
             <PortfolioSection embedded={true} />
           </motion.div>
@@ -287,46 +294,50 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       </section>
 
       {/* Marquee */}
-      <div className="w-full bg-black/70 backdrop-blur-2xl text-white py-6 overflow-hidden flex items-center border-y border-white/15 shadow-2xl relative z-20 -mt-[100px] bg-grid-wallpaper">
+      <div className="w-full bg-black/85 backdrop-blur-2xl text-white py-6 overflow-hidden flex items-center border-y border-white/15 shadow-2xl relative z-20 -mt-[100px] bg-grid-wallpaper">
         <motion.div
           variants={marqueeVariants}
           animate="animate"
-          className="flex whitespace-nowrap text-5xl md:text-7xl font-black uppercase tracking-tighter drop-shadow-md"
+          className="flex whitespace-nowrap text-5xl md:text-7xl font-black uppercase tracking-tighter drop-shadow-md items-center"
         >
           <motion.span 
             initial={{ backgroundPosition: "0% 50%" }}
             animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-[length:200%_auto] pb-2"
+            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-[length:200%_auto] pb-2 inline-flex items-center gap-4"
           >
-            Welcome to BLACKPIXEL
+            <img src="/blackcard-logo.jpg" alt="" className="w-12 h-12 rounded-xl object-contain bg-black inline-block" />
+            Welcome to BLACKCARD
           </motion.span>
           <span className="px-8 text-white">-</span>
           <motion.span 
             initial={{ backgroundPosition: "100% 50%" }}
             animate={{ backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-green-500 bg-[length:200%_auto] pb-2"
+            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-emerald-400 to-green-500 bg-[length:200%_auto] pb-2 inline-flex items-center gap-4"
           >
-            Welcome to BLACKPIXEL
+            <img src="/blackcard-logo.jpg" alt="" className="w-12 h-12 rounded-xl object-contain bg-black inline-block" />
+            Welcome to BLACKCARD
           </motion.span>
           <span className="px-8 text-white">-</span>
           <motion.span 
             initial={{ backgroundPosition: "0% 50%" }}
             animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 bg-[length:200%_auto] pb-2"
+            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 bg-[length:200%_auto] pb-2 inline-flex items-center gap-4"
           >
-            Welcome to BLACKPIXEL
+            <img src="/blackcard-logo.jpg" alt="" className="w-12 h-12 rounded-xl object-contain bg-black inline-block" />
+            Welcome to BLACKCARD
           </motion.span>
           <span className="px-8 text-white">-</span>
           <motion.span 
             initial={{ backgroundPosition: "100% 50%" }}
             animate={{ backgroundPosition: ["100% 50%", "0% 50%", "100% 50%"] }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-500 to-red-500 bg-[length:200%_auto] pb-2"
+            className="px-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-500 to-red-500 bg-[length:200%_auto] pb-2 inline-flex items-center gap-4"
           >
-            Welcome to BLACKPIXEL
+            <img src="/blackcard-logo.jpg" alt="" className="w-12 h-12 rounded-xl object-contain bg-black inline-block" />
+            Welcome to BLACKCARD
           </motion.span>
           <span className="px-8 text-white">-</span>
         </motion.div>
@@ -334,37 +345,45 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
       {/* Publications */}
       <section 
-        className="py-20 border-t border-white/10 bg-transparent text-white relative bg-grid-wallpaper"
+        className="py-24 border-t border-zinc-200/80 bg-transparent text-white relative bg-grid-wallpaper"
       >
         <motion.div 
-          className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center"
+          className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center text-center"
           initial="initial"
           whileInView="whileInView"
-          viewport={reveal3D.viewport}
-          variants={reveal3D}
-          transition={reveal3D.transition}
+          viewport={scrollReveal.viewport}
+          variants={scrollReveal}
+          transition={scrollReveal.transition}
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-8 font-sans">Features & Publications</p>
-          <div className="text-6xl font-black tracking-[0.2em] uppercase text-white transition-colors drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">DRUM</div>
+          <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-6 font-sans shadow-md inline-flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+            Features & Publications
+          </span>
+          <div className="text-6xl md:text-8xl font-black tracking-[0.2em] uppercase text-zinc-950 transition-colors drop-shadow-sm">
+            DRUM
+          </div>
+          <p className="text-base md:text-lg font-semibold text-zinc-800 max-w-xl text-center mt-4">
+            Global agency showcase featured across top design and creative editorial publications.
+          </p>
 
-          <div className="flex-shrink-0 pt-16 relative z-20 flex flex-col items-center gap-8">
+          <div className="flex-shrink-0 pt-12 relative z-20 flex flex-col items-center gap-8">
             <div className="flex flex-wrap gap-4 items-center justify-center">
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/60 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg hover:border-[#00FF66]/60 hover:shadow-[0_0_20px_rgba(0,255,102,0.3)]">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/75 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg hover:border-[#00FF66]/60 hover:shadow-[0_0_20px_rgba(0,255,102,0.3)]">
                 <FaTiktok className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20 hover:shadow-[#E60023]/50">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20 hover:shadow-[#E60023]/50">
                 <FaPinterest className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433]/80 via-[#dc2743]/80 to-[#bc1888]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
                 <FaInstagram className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
                 <FaYoutube className="w-7 h-7" />
               </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
+              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
                 <FaFacebook className="w-7 h-7" />
               </a>
-              <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366]/80 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
+              <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
                 <FaWhatsapp className="w-7 h-7" />
               </a>
             </div>
@@ -372,7 +391,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <button 
                 onClick={() => handleGatedLink("https://t.me/+1vH_j9h-myowZjQ0")} 
-                className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/20 bg-black/60 backdrop-blur-md text-white rounded-full px-8 py-4 hover:bg-white/10 hover:border-[#00FF66]/60 active:bg-[#00FF66] active:text-black transition-all duration-300 cursor-pointer shadow-lg"
+                className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/20 bg-black/80 backdrop-blur-md text-white rounded-full px-8 py-4 hover:bg-black hover:border-[#00FF66]/60 active:bg-[#00FF66] active:text-black transition-all duration-300 cursor-pointer shadow-xl"
               >
                 More about us 
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -393,48 +412,63 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
       </section>
 
       {/* What We Do */}
-      <section className="py-24 md:py-40 px-6 md:px-12 bg-transparent text-white border-t border-white/10 bg-grid-wallpaper">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
+      <section className="py-24 md:py-36 px-6 md:px-12 bg-transparent text-white border-t border-zinc-200/80 bg-grid-wallpaper">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8 items-center">
           <motion.div
             initial="initial"
             whileInView="whileInView"
-            viewport={revealLeft3D.viewport}
-            variants={revealLeft3D}
-            transition={revealLeft3D.transition}
+            viewport={scrollRevealLeft.viewport}
+            variants={scrollRevealLeft}
+            transition={scrollRevealLeft.transition}
           >
-            <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-6">What we do</p>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">Where strategy<br/>meets creativity</h2>
+            <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-6 inline-flex items-center gap-2 shadow-md">
+              <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+              What we do
+            </span>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-zinc-950">
+              Where strategy<br/>meets creativity
+            </h2>
           </motion.div>
           <motion.div 
             className="flex items-end"
             initial="initial"
             whileInView="whileInView"
-            viewport={revealRight3D.viewport}
-            variants={revealRight3D}
-            transition={revealRight3D.transition}
+            viewport={scrollRevealRight.viewport}
+            variants={scrollRevealRight}
+            transition={scrollRevealRight.transition}
           >
-            <p className="text-xl md:text-2xl font-medium tracking-tight text-zinc-300 leading-snug bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/10">
-              Unlock your potential with premium digital products and high-performance trading EAs. Ready to take your trading to the next level? Join our Telegram community, explore exclusive offers on Whop, and get instant access to premium digital products and powerful trading EAs on Market
-            </p>
+            <div className="text-xl md:text-2xl font-medium tracking-tight text-white leading-snug bg-zinc-950/85 backdrop-blur-2xl p-8 md:p-10 rounded-3xl border border-white/15 shadow-2xl">
+              <p className="text-zinc-200 leading-relaxed">
+                Unlock your potential with premium digital products and high-performance trading EAs. Ready to take your trading to the next level? Join our <span className="text-[#00FF66] font-semibold">Telegram</span> community, explore exclusive offers on <span className="text-[#00FF66] font-semibold">Whop</span>, and get instant access to premium digital products and powerful trading EAs on <span className="text-[#00FF66] font-semibold">Market</span>.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section className="py-24 md:py-40 px-6 md:px-12 bg-transparent border-t border-white/10 text-white relative overflow-hidden bg-grid-wallpaper">
+      <section className="py-24 md:py-36 px-6 md:px-12 bg-transparent border-t border-zinc-200/80 text-white relative overflow-hidden bg-grid-wallpaper">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row gap-16">
+          <div className="flex flex-col md:flex-row gap-12 lg:gap-16">
             <motion.div 
-              className="md:w-1/3"
+              className="md:w-1/3 flex flex-col items-start"
               initial="initial"
               whileInView="whileInView"
-              viewport={revealLeft3D.viewport}
-              variants={revealLeft3D}
-              transition={revealLeft3D.transition}
+              viewport={scrollRevealLeft.viewport}
+              variants={scrollRevealLeft}
+              transition={scrollRevealLeft.transition}
             >
-              <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-4">SERVICES</p>
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">What we’re good at</h2>
-              <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+              <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-4 inline-flex items-center gap-2 shadow-md">
+                <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+                SERVICES
+              </span>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-zinc-950">
+                What we’re good at
+              </h2>
+              <p className="mt-4 text-base font-semibold text-zinc-800 max-w-sm">
+                From high-conversion visual branding to complex algorithmic tools, we craft digital products that elevate your digital presence.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] inline-flex items-center justify-center text-white bg-[#25D366] hover:bg-[#25D366]/80 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/40">
                   <FaWhatsapp className="w-7 h-7" />
                 </a>
@@ -451,7 +485,13 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               </div>
             </motion.div>
             
-            <div className="md:w-2/3 flex flex-col">
+            <motion.div 
+              className="md:w-2/3 flex flex-col bg-zinc-950/90 backdrop-blur-2xl border border-white/15 rounded-3xl p-6 md:p-8 shadow-2xl divide-y divide-white/10"
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={staggerContainer}
+            >
               {[
                 "Branding and packaging",
                 "Graphic Design", 
@@ -464,58 +504,61 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               ].map((service, idx) => (
                 <motion.div 
                   key={idx} 
-                  className="group border-b border-white/10 flex justify-between items-center py-6 md:py-8 cursor-pointer hover:px-6 hover:bg-white/5 hover:border-[#00FF66]/50 rounded-2xl transition-all duration-300 backdrop-blur-sm"
-                  initial={{ opacity: 0, rotateX: -20, y: 20, transformPerspective: 1000 }}
-                  whileInView={{ opacity: 1, rotateX: 0, y: 0, transformPerspective: 1000 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" as any }}
+                  className="group flex justify-between items-center py-5 md:py-6 cursor-pointer hover:px-4 hover:bg-white/5 rounded-2xl transition-all duration-300"
+                  variants={staggerItem}
+                  whileHover={{ x: 6 }}
                 >
-                  <h3 className="text-2xl md:text-4xl font-bold tracking-tight text-white group-hover:text-[#00FF66] transition-colors">{service}</h3>
-                  <ArrowUpRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transform translate-x-[-20px] group-hover:translate-x-0 transition-all duration-300 text-[#00FF66]" />
+                  <div className="flex items-center gap-4 md:gap-6">
+                    <span className="text-xs md:text-sm font-mono text-[#00FF66] font-bold">0{idx + 1}</span>
+                    <h3 className="text-xl md:text-3xl font-bold tracking-tight text-white group-hover:text-[#00FF66] transition-colors">{service}</h3>
+                  </div>
+                  <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 text-zinc-400 group-hover:text-[#00FF66] transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Partners */}
-      <section className="py-24 border-t border-white/10 bg-transparent text-white transition-colors duration-500 bg-grid-wallpaper">
+      <section className="py-24 border-t border-zinc-200/80 bg-transparent text-white transition-colors duration-500 bg-grid-wallpaper">
         <motion.div 
-          className="max-w-7xl mx-auto px-6 md:px-12"
+          className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center"
           initial="initial"
           whileInView="whileInView"
-          viewport={reveal3D.viewport}
-          variants={reveal3D}
-          transition={reveal3D.transition}
+          viewport={scrollReveal.viewport}
+          variants={scrollReveal}
+          transition={scrollReveal.transition}
         >
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-12">Partners / Trusted by forward-thinking brands</p>
-          <div className="flex flex-col items-center justify-center opacity-60 gap-8">
-             <div className="flex flex-wrap justify-center gap-12 md:gap-24 text-white transition-colors font-sans">
-                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand1</span>
-                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand2</span>
-                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand3</span>
-                <span className="text-3xl font-black uppercase tracking-widest text-zinc-300 hover:text-[#00FF66] transition-colors cursor-default">Brand4</span>
-             </div>
+          <span className="px-4 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-[#00FF66] mb-8 inline-flex items-center gap-2 shadow-md">
+            <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+            Partners / Trusted by forward-thinking brands
+          </span>
+          
+          <div className="w-full bg-zinc-950/85 backdrop-blur-2xl border border-white/15 rounded-3xl p-8 md:p-12 shadow-2xl flex flex-wrap justify-center sm:justify-around items-center gap-8 md:gap-16">
+            <span className="text-2xl md:text-3xl font-black uppercase tracking-widest text-zinc-100 hover:text-[#00FF66] transition-colors cursor-default">Brand1</span>
+            <span className="text-2xl md:text-3xl font-black uppercase tracking-widest text-zinc-100 hover:text-[#00FF66] transition-colors cursor-default">Brand2</span>
+            <span className="text-2xl md:text-3xl font-black uppercase tracking-widest text-zinc-100 hover:text-[#00FF66] transition-colors cursor-default">Brand3</span>
+            <span className="text-2xl md:text-3xl font-black uppercase tracking-widest text-zinc-100 hover:text-[#00FF66] transition-colors cursor-default">Brand4</span>
           </div>
         </motion.div>
       </section>
 
       {/* Works Intro */}
-      <section className="pt-24 md:pt-40 px-6 md:px-12 bg-transparent text-white pb-16 border-t border-white/10 bg-grid-wallpaper">
+      <section className="pt-24 md:pt-36 px-6 md:px-12 bg-transparent text-white pb-16 border-t border-zinc-200/80 bg-grid-wallpaper">
         <motion.div 
           className="max-w-4xl mx-auto flex flex-col gap-8 text-center items-center"
           initial="initial"
           whileInView="whileInView"
-          viewport={reveal3D.viewport}
-          variants={reveal3D}
-          transition={reveal3D.transition}
+          viewport={scrollReveal.viewport}
+          variants={scrollReveal}
+          transition={scrollReveal.transition}
         >
-          <p className="text-xs font-bold uppercase tracking-widest text-[#00FF66]">Works</p>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight text-white">
+          <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest text-[#00FF66] inline-flex items-center gap-2 shadow-md">Works</span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight text-zinc-950">
             This is how we do business. Our brand strategists integrate business, marketing, communications, analytics, and design to convey authentic, meaningful, and unique brands.
           </h2>
-          <p className="text-xl md:text-2xl font-medium text-zinc-400 max-w-3xl">
+          <p className="text-xl md:text-2xl font-semibold text-zinc-800 max-w-3xl leading-relaxed">
             We believe details make the difference; we'll introduce your brand innovatively, creatively, and comprehensively to the audience. We'll get your brand to communicate with the target customer's subconscious and leave an imprint for the future.
           </p>
         </motion.div>
@@ -523,16 +566,16 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
       {/* Projects */}
       <section className="bg-transparent px-6 md:px-12 pb-40 text-white bg-grid-wallpaper">
-        <div className="max-w-7xl mx-auto flex flex-col border-t border-white/10 pt-24">
+        <div className="max-w-7xl mx-auto flex flex-col border-t border-zinc-200/80 pt-24">
           
           {/* Project 1 */}
           <motion.div 
-            className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-32 items-center bg-zinc-950/60 p-8 lg:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-xl"
+            className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-32 items-center bg-zinc-950/90 p-8 lg:p-12 rounded-[2.5rem] border border-white/15 backdrop-blur-2xl shadow-2xl"
             initial="initial"
             whileInView="whileInView"
-            viewport={reveal3D.viewport}
-            variants={reveal3D}
-            transition={reveal3D.transition}
+            viewport={scrollReveal.viewport}
+            variants={scrollReveal}
+            transition={scrollReveal.transition}
           >
             <div 
               onClick={() => setActiveLightbox({ 
@@ -566,12 +609,12 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
           {/* Project 2 */}
           <motion.div 
-            className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-24 mb-32 items-center bg-zinc-950/60 p-8 lg:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-xl"
+            className="flex flex-col lg:flex-row-reverse gap-12 lg:gap-24 mb-32 items-center bg-zinc-950/90 p-8 lg:p-12 rounded-[2.5rem] border border-white/15 backdrop-blur-2xl shadow-2xl"
             initial="initial"
             whileInView="whileInView"
-            viewport={reveal3D.viewport}
-            variants={reveal3D}
-            transition={reveal3D.transition}
+            viewport={scrollReveal.viewport}
+            variants={scrollReveal}
+            transition={scrollReveal.transition}
           >
             <div 
               onClick={() => setActiveLightbox({ 
@@ -593,13 +636,13 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             </div>
             <div className="w-full lg:w-1/2 flex flex-col items-start gap-8">
               <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">Branding for Mezcal Apeña</h3>
-              <div className="space-y-4 text-zinc-300 font-medium leading-relaxed">
+              <div className="space-y-4 text-zinc-200 font-medium leading-relaxed">
                 <p><strong className="text-[#00FF66] uppercase tracking-widest text-xs border-b-2 border-[#00FF66] pb-1">About Project</strong></p>
                 <p className="mt-4">Mezcal Apeña is a premium mezcal brand that distinguishes itself through a deep commitment to tradition, quality, and female empowerment. As a proud female-owned enterprise, it reveres the authenticity and rich heritage of its products...</p>
                 <p><strong>Logo solution:</strong><br/>The logo combines the Mexican Woman, Agave Plant, Earrings, and Text Fragment.</p>
               </div>
               
-              <div className="grid grid-cols-2 gap-8 text-sm font-medium text-zinc-400 tracking-tight w-full pt-4 border-t border-white/10">
+              <div className="grid grid-cols-2 gap-8 text-sm font-medium text-zinc-300 tracking-tight w-full pt-4 border-t border-white/10">
                  <div>
                     <p>Date: 2024</p>
                     <p>Client: Mezcal Apeña</p>
@@ -618,12 +661,12 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
           {/* Project 3 */}
           <motion.div 
-            className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center mb-24 bg-zinc-950/60 p-8 lg:p-12 rounded-[2.5rem] border border-white/10 backdrop-blur-xl"
+            className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center mb-24 bg-zinc-950/90 p-8 lg:p-12 rounded-[2.5rem] border border-white/15 backdrop-blur-2xl shadow-2xl"
             initial="initial"
             whileInView="whileInView"
-            viewport={reveal3D.viewport}
-            variants={reveal3D}
-            transition={reveal3D.transition}
+            viewport={scrollReveal.viewport}
+            variants={scrollReveal}
+            transition={scrollReveal.transition}
           >
             <div 
               onClick={() => setActiveLightbox({ 
@@ -645,21 +688,28 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
             </div>
             <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
               <h3 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] text-white">Waunt: Integrated marketing campaign</h3>
-              <p className="text-zinc-300 font-medium leading-relaxed text-lg">
-                BLACKPIXEL creative agency recently had the honor of partnering with Oriflame, a globally renowned brand with a presence in over 60 countries. The task at hand was no easy feat - to launch and advertise their new line of WAUNT products specifically targeted towards the female Gen Z audience in Armenia...
+              <p className="text-zinc-200 font-medium leading-relaxed text-lg">
+                BLACKCARD creative agency recently had the honor of partnering with Oriflame, a globally renowned brand with a presence in over 60 countries. The task at hand was no easy feat - to launch and advertise their new line of WAUNT products specifically targeted towards the female Gen Z audience in Armenia...
               </p>
               <a href="#" className="font-bold uppercase tracking-widest text-xs border-b border-[#00FF66] pb-1 text-white hover:text-[#00FF66] transition-colors mt-4">See more &gt;&gt;</a>
             </div>
           </motion.div>
 
-          <div className="flex justify-center pt-12">
+          <motion.div 
+            className="flex justify-center pt-12"
+            initial="initial"
+            whileInView="whileInView"
+            viewport={scrollReveal.viewport}
+            variants={scrollReveal}
+            transition={scrollReveal.transition}
+          >
             <button 
               onClick={() => handleGatedLink("https://payhip.com/midzerohub")}
-              className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/20 bg-black/60 backdrop-blur-xl rounded-full px-12 py-5 hover:bg-white/10 text-white hover:border-[#00FF66]/60 active:bg-[#00FF66] active:text-black transition-all duration-300 cursor-pointer shadow-lg"
+              className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest border border-white/20 bg-black/85 backdrop-blur-xl rounded-full px-12 py-5 hover:bg-black text-white hover:border-[#00FF66]/60 active:bg-[#00FF66] active:text-black transition-all duration-300 cursor-pointer shadow-xl"
             >
               Discover all 
             </button>
-          </div>
+          </motion.div>
 
         </div>
       </section>

@@ -125,12 +125,12 @@
     @apply border-border outline-ring/50;
   }
   body {
-    background-color: #050505;
-    background-image: 
-      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 255, 255, 0.04), transparent 80%),
-      url('/grid-wallpaper.jpg');
+    background-color: #f5f5f7;
+    background-image: url('/5.jpg');
     background-repeat: repeat;
-    background-size: auto, 260px auto;
+    background-size: contain;
+    background-position: center top;
+    background-attachment: fixed;
     color: #ffffff;
     min-height: 100vh;
   }
@@ -141,28 +141,30 @@
 }
 
 .bg-grid-wallpaper {
-  background-color: #050505;
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(0, 255, 102, 0.03), transparent 70%),
-    url('/grid-wallpaper.jpg');
+  background-color: transparent;
+  background-image: url('/5.jpg');
   background-repeat: repeat;
-  background-size: auto, 260px auto;
+  background-size: contain;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
 .bg-grid-wallpaper-overlay {
-  background-color: #050505;
-  background-image: 
-    linear-gradient(to bottom, rgba(5, 5, 5, 0.75), rgba(5, 5, 5, 0.9)),
-    url('/grid-wallpaper.jpg');
+  background-color: transparent;
+  background-image: url('/5.jpg');
   background-repeat: repeat;
-  background-size: auto, 260px auto;
+  background-size: contain;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
 .bg-grid-pure {
-  background-color: #050505;
-  background-image: url('/grid-wallpaper.jpg');
+  background-color: transparent;
+  background-image: url('/5.jpg');
   background-repeat: repeat;
-  background-size: 260px auto;
+  background-size: contain;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
 .glass-panel {

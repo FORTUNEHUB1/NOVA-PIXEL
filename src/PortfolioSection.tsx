@@ -60,28 +60,34 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
 
   return (
     <section 
-      className={`${embedded ? 'pt-8 pb-12 min-h-[600px] rounded-3xl' : 'pt-32 pb-24 min-h-screen border-t border-white/10'} bg-transparent relative z-20 bg-grid-wallpaper`}
+      className={`${embedded ? 'pt-8 pb-12 min-h-[600px] rounded-3xl' : 'pt-32 pb-24 min-h-screen border-t border-zinc-200/80'} bg-transparent relative z-20 bg-grid-wallpaper`}
     >
-      <div className={`${embedded ? 'max-w-full px-6' : 'max-w-7xl mx-auto px-6 lg:px-12'}`}>
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={`${embedded ? 'max-w-full px-4 sm:px-6' : 'max-w-7xl mx-auto px-6 lg:px-12 bg-zinc-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl'}`}
+      >
         <div className="flex flex-col gap-2 mb-10">
           <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
             04 // Innovation Hub
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">Portfolio Projects</h2>
-          <p className="text-zinc-400 text-sm md:text-base max-w-xl mt-4">Discover our diverse range of high-performance digital solutions, from automated trading systems to customized educational platforms.</p>
+          <p className="text-zinc-200 text-sm md:text-base font-medium max-w-xl mt-4">Discover our diverse range of high-performance digital solutions, from automated trading systems to customized educational platforms.</p>
         </div>
         
         {/* Search Bar */}
         <div className="mb-12 relative max-w-2xl">
           <div className="relative flex items-center">
-            <Search className="absolute left-4 w-5 h-5 text-zinc-400" />
+            <Search className="absolute left-4 w-5 h-5 text-zinc-300" />
             <input 
               type="text"
               placeholder="Search by title, skill, or category..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-black/60 backdrop-blur-xl border border-white/20 rounded-full py-4 pl-12 pr-6 text-white placeholder:text-zinc-500 font-medium focus:outline-none focus:border-[#00FF66] focus:ring-2 focus:ring-[#00FF66]/30 transition-all shadow-xl"
+              className="w-full bg-black/80 backdrop-blur-xl border border-white/25 rounded-full py-4 pl-12 pr-6 text-white placeholder:text-zinc-400 font-medium focus:outline-none focus:border-[#00FF66] focus:ring-2 focus:ring-[#00FF66]/30 transition-all shadow-xl"
             />
           </div>
         </div>
@@ -124,7 +130,7 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
             </div>
           )}
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Project Details Modal */}
       <AnimatePresence>

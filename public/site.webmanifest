@@ -1,9 +1,9 @@
 {
-  "name": "Nova Nexus",
-  "short_name": "Nova Nexus",
+  "name": "BLACKCARD",
+  "short_name": "BLACKCARD",
   "icons": [
     {
-      "src": "/favicon.jpg",
+      "src": "/blackcard-logo.jpg",
       "sizes": "192x192 512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"

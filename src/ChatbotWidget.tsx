@@ -57,7 +57,7 @@ export default function ChatbotWidget({ user }: ChatbotWidgetProps) {
       const welcomeMsg: Message = {
         id: 'welcome-01',
         role: 'assistant',
-        content: `👋 Hi there! Welcome to **BLACKPIXEL Creative Agency**. 
+        content: `👋 Hi there! Welcome to **BLACKCARD Creative Agency**. 
 
 I am your AI assistant, powered by our custom **Chatbase** integration. How can I help you outperform your competitors and boost your revenue today?`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -90,7 +90,7 @@ I am your AI assistant, powered by our custom **Chatbase** integration. How can 
         role: 'assistant',
         content: `👋 Chat history cleared. 
 
-I am here to help you learn more about BLACKPIXEL's products, services, and creative strategies. Ask me anything!`,
+I am here to help you learn more about BLACKCARD's products, services, and creative strategies. Ask me anything!`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages([welcomeMsg]);
@@ -232,13 +232,15 @@ I am here to help you learn more about BLACKPIXEL's products, services, and crea
             <div className="bg-white dark:bg-[#111] px-5 py-3.5 flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 select-none">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-9 h-9 bg-black dark:bg-[#F0F0EE] rounded-lg flex items-center justify-center font-black text-xs text-white dark:text-black">
-                    MØ
-                  </div>
+                  <img 
+                    src="/blackcard-logo.jpg" 
+                    alt="BLACKCARD" 
+                    className="w-9 h-9 rounded-lg object-contain bg-black border border-white/10" 
+                  />
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white dark:border-[#111] rounded-full" />
                 </div>
                 <div>
-                  <h4 className="font-sans font-bold text-sm tracking-tight text-black dark:text-white leading-none">BLACKPIXEL Assistant</h4>
+                  <h4 className="font-sans font-bold text-sm tracking-tight text-black dark:text-white leading-none">BLACKCARD Assistant</h4>
                   <p className="text-[10px] text-emerald-500 dark:text-emerald-400 font-bold uppercase tracking-wider mt-1 flex items-center gap-1">
                     <span className="inline-block w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
                     Chatbase AI Active
@@ -277,7 +279,7 @@ I am here to help you learn more about BLACKPIXEL's products, services, and crea
                 <div className="w-full h-full bg-white relative">
                   <iframe
                     src={`https://www.chatbase.co/chatbot-iframe/${chatbotId}`}
-                    title="BLACKPIXEL Chatbase Assistant"
+                    title="BLACKCARD Chatbase Assistant"
                     width="100%"
                     height="100%"
                     frameBorder="0"
@@ -307,7 +309,7 @@ I am here to help you learn more about BLACKPIXEL's products, services, and crea
                       >
                         {/* Avatar/System label */}
                         <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mb-1 px-1">
-                          {msg.role === 'user' ? 'YOU' : msg.role === 'assistant' ? 'BLACKPIXEL BOT' : 'SYSTEM STATUS'}
+                          {msg.role === 'user' ? 'YOU' : msg.role === 'assistant' ? 'BLACKCARD BOT' : 'SYSTEM STATUS'}
                         </div>
 
                         {/* Speech Bubble contents */}
@@ -333,7 +335,7 @@ I am here to help you learn more about BLACKPIXEL's products, services, and crea
                     {isLoading && (
                       <div className="self-start flex flex-col items-start max-w-[85%]">
                         <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mb-1 px-1">
-                          BLACKPIXEL BOT
+                          BLACKCARD BOT
                         </div>
                         <div className="bg-white dark:bg-[#111] border border-zinc-200 dark:border-zinc-800 px-4 py-3 rounded-2xl rounded-tl-none flex items-center gap-1">
                           <span className="w-1.5 h-1.5 bg-zinc-600 dark:bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -355,7 +357,7 @@ I am here to help you learn more about BLACKPIXEL's products, services, and crea
                       type="text"
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
-                      placeholder="Ask BLACKPIXEL AI anything..."
+                      placeholder="Ask BLACKCARD AI anything..."
                       disabled={isLoading}
                       className="flex-1 bg-white/40 dark:bg-black/40 backdrop-blur-md text-zinc-900 dark:text-zinc-100 border border-zinc-300/50 dark:border-zinc-700/50 rounded-full px-5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20 focus:border-transparent transition-all outline-none shadow-inner placeholder-zinc-500 dark:placeholder-zinc-400"
                     />
@@ -373,7 +375,7 @@ I am here to help you learn more about BLACKPIXEL's products, services, and crea
             
             {/* Friendly footer */}
             <div className="bg-zinc-50 dark:bg-[#151515] border-t border-zinc-100 dark:border-zinc-900 py-2.5 text-center text-[10px] text-zinc-400 font-medium tracking-wide flex items-center justify-center gap-1 select-none">
-              Powered by BLACKPIXEL AI
+              Powered by BLACKCARD AI
             </div>
           </motion.div>
         )}
