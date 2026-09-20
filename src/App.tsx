@@ -107,6 +107,19 @@ export default function App() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 font-medium text-zinc-300 bg-black/60 backdrop-blur-xl px-7 py-2.5 rounded-full border border-white/15 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
               <Link to="/" className="hover:text-[#00FF66] transition-colors">Start</Link>
+              <a 
+                href="/#portfolio" 
+                onClick={(e) => { 
+                  const el = document.getElementById('portfolio'); 
+                  if (el) { 
+                    e.preventDefault(); 
+                    el.scrollIntoView({ behavior: 'smooth' }); 
+                  } 
+                }} 
+                className="hover:text-[#00FF66] transition-colors cursor-pointer"
+              >
+                Portfolio
+              </a>
               <Link to="/blog" className="hover:text-[#00FF66] transition-colors">Blog</Link>
               {user && <Link to="/admin" className="hover:text-[#00FF66] transition-colors font-bold text-white">Admin</Link>}
             </div>
@@ -139,6 +152,20 @@ export default function App() {
                 <span className="font-black text-xl tracking-tighter uppercase text-white">BLACKCARD</span>
               </div>
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:text-[#00FF66] transition-colors">Start</Link>
+              <a 
+                href="/#portfolio" 
+                onClick={(e) => { 
+                  setIsMenuOpen(false); 
+                  const el = document.getElementById('portfolio'); 
+                  if (el) { 
+                    e.preventDefault(); 
+                    el.scrollIntoView({ behavior: 'smooth' }); 
+                  } 
+                }} 
+                className="hover:text-[#00FF66] transition-colors cursor-pointer"
+              >
+                Portfolio
+              </a>
               <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-[#00FF66] transition-colors">Blog</Link>
               {user && <Link to="/admin" onClick={() => setIsMenuOpen(false)} className="font-bold text-[#00FF66] hover:text-white transition-colors">Admin</Link>}
             </div>

@@ -39,39 +39,39 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
     mouseY.set(y);
   };
 
-  // Subtle scroll-triggered reveal variants
+  // Subtle premium scroll-triggered reveal variants
   const scrollReveal: any = {
-    initial: { opacity: 0, y: 35, scale: 0.98 },
+    initial: { opacity: 0, y: 32, scale: 0.98 },
     whileInView: { opacity: 1, y: 0, scale: 1 },
-    viewport: { once: true, amount: 0.15, margin: "-40px" },
+    viewport: { once: true, amount: 0.08 },
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   };
   
   const scrollRevealLeft: any = {
-    initial: { opacity: 0, x: -40 },
+    initial: { opacity: 0, x: -35 },
     whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true, amount: 0.15, margin: "-40px" },
+    viewport: { once: true, amount: 0.08 },
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   };
   
   const scrollRevealRight: any = {
-    initial: { opacity: 0, x: 40 },
+    initial: { opacity: 0, x: 35 },
     whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true, amount: 0.15, margin: "-40px" },
+    viewport: { once: true, amount: 0.08 },
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   };
 
   const staggerContainer: any = {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
-    viewport: { once: true, amount: 0.15 },
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 }
+    viewport: { once: true, amount: 0.08 },
+    transition: { staggerChildren: 0.07, delayChildren: 0.05 }
   };
 
   const staggerItem: any = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
+    viewport: { once: true, amount: 0.08 },
     transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
   };
 
@@ -100,19 +100,24 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
         <div className="relative z-30 flex flex-col items-start text-left px-6 md:px-12 lg:px-20 w-full max-w-[1600px] mx-auto pb-10">
           <div className="flex flex-col lg:flex-row w-full items-center lg:items-center justify-between gap-12 lg:gap-8">
             <div className="w-full lg:w-1/2 flex flex-col items-start">
-              <span className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs md:text-sm font-bold text-[#00FF66] tracking-widest mb-4 uppercase inline-flex items-center gap-2.5 shadow-xl">
+              <motion.span 
+                initial={{ opacity: 0, y: -15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="px-3.5 py-1.5 bg-black/85 backdrop-blur-md rounded-full border border-white/20 text-xs md:text-sm font-bold text-[#00FF66] tracking-widest mb-4 uppercase inline-flex items-center gap-2.5 shadow-xl"
+              >
                 <img 
                   src="/blackcard-logo.jpg" 
                   alt="BLACKCARD Icon" 
                   className="w-4 h-4 rounded object-contain bg-black" 
                 />
                 BLACKCARD STUDIO
-              </span>
+              </motion.span>
               
               <motion.div 
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                initial={{ opacity: 0, y: 25, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="relative mb-8 flex flex-col items-start"
               >
                 <motion.h1 
@@ -131,7 +136,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-wrap gap-2 md:gap-3 items-center justify-start bg-black/60 backdrop-blur-2xl border border-white/20 p-2 md:p-2.5 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.8)] max-w-full overflow-x-auto scrollbar-hide relative group"
               >
                 <button 
@@ -153,7 +158,14 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                   Whop
                 </button>
                 <button 
-                  onClick={() => navigate('/portfolio')}
+                  onClick={() => {
+                    const el = document.getElementById('portfolio');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      navigate('/portfolio');
+                    }
+                  }}
                   className="px-6 md:px-8 py-3 bg-[#00FF66] text-black rounded-full text-xs md:text-sm font-black uppercase tracking-widest hover:bg-[#00E55C] transition-all cursor-pointer whitespace-nowrap shadow-[0_0_20px_rgba(0,255,102,0.6)] hover:shadow-[0_0_35px_rgba(0,255,102,0.9)] active:scale-95"
                 >
                   Skill
@@ -163,7 +175,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
 
             <div className="w-full lg:w-1/2 flex justify-center perspective-[1200px] mt-8 lg:mt-0">
               <motion.div
-                initial={{ opacity: 0, rotateY: 25, rotateX: 10, scale: 0.8 }}
+                initial={{ opacity: 0, rotateY: 20, rotateX: 10, scale: 0.88, y: 25 }}
                 animate={{ 
                   opacity: 1, 
                   rotateY: -15, 
@@ -172,8 +184,9 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
                   y: [0, -10, 0]
                 }}
                 transition={{ 
-                  duration: 1.2, 
-                  ease: "easeOut",
+                  duration: 1.1, 
+                  delay: 0.15,
+                  ease: [0.16, 1, 0.3, 1],
                   y: {
                     duration: 4,
                     repeat: Infinity,
@@ -279,22 +292,17 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
               </motion.div>
             </div>
           </div>
-          
-          {/* Portfolio Section Integration */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full mt-12 z-40 relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-zinc-950/90 backdrop-blur-2xl"
-          >
-            <PortfolioSection embedded={true} />
-          </motion.div>
         </div>
       </section>
 
       {/* Marquee */}
-      <div className="w-full bg-black/85 backdrop-blur-2xl text-white py-6 overflow-hidden flex items-center border-y border-white/15 shadow-2xl relative z-20 -mt-[100px] bg-grid-wallpaper">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="w-full bg-black/85 backdrop-blur-2xl text-white py-6 overflow-hidden flex items-center border-y border-white/15 shadow-2xl relative z-20 bg-grid-wallpaper"
+      >
         <motion.div
           variants={marqueeVariants}
           animate="animate"
@@ -341,7 +349,7 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           </motion.span>
           <span className="px-8 text-white">-</span>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Publications */}
       <section 
@@ -367,26 +375,32 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           </p>
 
           <div className="flex-shrink-0 pt-12 relative z-20 flex flex-col items-center gap-8">
-            <div className="flex flex-wrap gap-4 items-center justify-center">
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/75 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg hover:border-[#00FF66]/60 hover:shadow-[0_0_20px_rgba(0,255,102,0.3)]">
+            <motion.div 
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={staggerContainer.viewport}
+              className="flex flex-wrap gap-4 items-center justify-center"
+            >
+              <motion.a variants={staggerItem} href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-black/75 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg hover:border-[#00FF66]/60 hover:shadow-[0_0_20px_rgba(0,255,102,0.3)]">
                 <FaTiktok className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20 hover:shadow-[#E60023]/50">
+              </motion.a>
+              <motion.a variants={staggerItem} href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#E60023]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#E60023]/20 hover:shadow-[#E60023]/50">
                 <FaPinterest className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
+              </motion.a>
+              <motion.a variants={staggerItem} href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#dc2743]/20">
                 <FaInstagram className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
+              </motion.a>
+              <motion.a variants={staggerItem} href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#FF0000]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#FF0000]/20">
                 <FaYoutube className="w-7 h-7" />
-              </a>
-              <a href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
+              </motion.a>
+              <motion.a variants={staggerItem} href="#" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#1877F2]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#1877F2]/20">
                 <FaFacebook className="w-7 h-7" />
-              </a>
-              <a href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
+              </motion.a>
+              <motion.a variants={staggerItem} href="https://wa.me/254797759879" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-[1.25rem] flex items-center justify-center text-white bg-[#25D366]/90 backdrop-blur-md border border-white/20 hover:scale-110 transition-all shadow-lg shadow-[#25D366]/20">
                 <FaWhatsapp className="w-7 h-7" />
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <button 
@@ -519,6 +533,9 @@ export default function Home({ handleGatedLink }: { handleGatedLink: (url: strin
           </div>
         </div>
       </section>
+
+      {/* Portfolio Section - Innovation Hub */}
+      <PortfolioSection embedded={true} />
 
       {/* Partners */}
       <section className="py-24 border-t border-zinc-200/80 bg-transparent text-white transition-colors duration-500 bg-grid-wallpaper">

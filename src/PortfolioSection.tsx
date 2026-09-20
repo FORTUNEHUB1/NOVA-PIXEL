@@ -27,7 +27,10 @@ import androidBg from './assets/images/android-bg-2.jpg';
 
 export default function PortfolioSection({ embedded = false }: { embedded?: boolean } = {}) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<{title: string, tech: string[], category: string, img: string, desc: string} | null>(null);
+
+  const categories = ["All", "AI", "Web", "Trading", "Media", "Design", "Bots"];
 
   const projects = [
     { title: "Marketing", tech: ["Digital", "SEO", "Growth"], category: "Marketing", img: marketingImg, desc: "A robust digital ecosystem tailored for hyper-growth, leveraging advanced SEO strategies and data-driven marketing campaigns to amplify brand reach." },
@@ -50,83 +53,170 @@ export default function PortfolioSection({ embedded = false }: { embedded?: bool
 
   const filteredProjects = projects.filter(p => {
     const query = searchQuery.toLowerCase();
-    return (
+    const matchesCategory = selectedCategory === "All" || p.category.toLowerCase() === selectedCategory.toLowerCase();
+    const matchesQuery = !query || (
       p.title.toLowerCase().includes(query) ||
       p.desc.toLowerCase().includes(query) ||
       p.category.toLowerCase().includes(query) ||
       p.tech.some(t => t.toLowerCase().includes(query))
     );
+    return matchesCategory && matchesQuery;
   });
 
   return (
     <section 
-      className={`${embedded ? 'pt-8 pb-12 min-h-[600px] rounded-3xl' : 'pt-32 pb-24 min-h-screen border-t border-zinc-200/80'} bg-transparent relative z-20 bg-grid-wallpaper`}
+      id="portfolio"
+      className={`${embedded ? 'py-20 md:py-28 border-t border-zinc-200/80' : 'pt-32 pb-24 min-h-screen border-t border-zinc-200/80'} bg-transparent relative z-20 bg-grid-wallpaper`}
     >
       <motion.div 
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 35 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.05 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`${embedded ? 'max-w-full px-4 sm:px-6' : 'max-w-7xl mx-auto px-6 lg:px-12 bg-zinc-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl'}`}
+        className="max-w-7xl mx-auto px-6 lg:px-12 bg-zinc-950/95 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-6 sm:p-10 lg:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
       >
-        <div className="flex flex-col gap-2 mb-10">
-          <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
-            04 // Innovation Hub
-          </span>
-          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">Portfolio Projects</h2>
-          <p className="text-zinc-200 text-sm md:text-base font-medium max-w-xl mt-4">Discover our diverse range of high-performance digital solutions, from automated trading systems to customized educational platforms.</p>
-        </div>
-        
-        {/* Search Bar */}
-        <div className="mb-12 relative max-w-2xl">
-          <div className="relative flex items-center">
-            <Search className="absolute left-4 w-5 h-5 text-zinc-300" />
-            <input 
-              type="text"
-              placeholder="Search by title, skill, or category..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-black/80 backdrop-blur-xl border border-white/25 rounded-full py-4 pl-12 pr-6 text-white placeholder:text-zinc-400 font-medium focus:outline-none focus:border-[#00FF66] focus:ring-2 focus:ring-[#00FF66]/30 transition-all shadow-xl"
-            />
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-8 border-b border-white/10">
+          <div className="flex flex-col gap-2">
+            <span className="text-[#00FF66] font-bold tracking-widest uppercase text-xs flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+              Innovation Hub // Portfolio Works
+            </span>
+            <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tight">Portfolio Projects</h2>
+            <p className="text-zinc-300 text-sm md:text-base font-medium max-w-xl mt-2">
+              Explore our comprehensive showcase of high-performance digital systems, trading bots, AI pipelines, and bespoke client architectures.
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-400 bg-black/60 px-4 py-2 rounded-full border border-white/15 self-start md:self-auto">
+            <span className="text-[#00FF66]">{filteredProjects.length}</span> of {projects.length} Works Available
           </div>
         </div>
         
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Search Bar & Category Filters */}
+        <div className="flex flex-col gap-6 mb-10">
+          <div className="relative max-w-2xl">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00FF66]" />
+            <input 
+              type="text"
+              placeholder="Search 16+ projects by title, technology, or keywords..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-black/90 backdrop-blur-xl border border-white/25 rounded-full py-4 pl-12 pr-12 text-white placeholder:text-zinc-400 font-medium focus:outline-none focus:border-[#00FF66] focus:ring-2 focus:ring-[#00FF66]/40 transition-all shadow-xl text-sm md:text-base"
+            />
+            {searchQuery && (
+              <button 
+                onClick={() => setSearchQuery("")}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white p-1"
+                aria-label="Clear search"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+
+          {/* Category Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            {categories.map((cat) => {
+              const count = cat === "All" ? projects.length : projects.filter(p => p.category.toLowerCase() === cat.toLowerCase()).length;
+              const isActive = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
+                    isActive 
+                      ? 'bg-[#00FF66] text-black shadow-[0_0_20px_rgba(0,255,102,0.4)]' 
+                      : 'bg-black/70 hover:bg-white/10 text-zinc-300 hover:text-white border border-white/15'
+                  }`}
+                >
+                  {cat}
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${isActive ? 'bg-black/20 text-black' : 'bg-white/10 text-zinc-400'}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        
+        {/* Projects Grid */}
+        <motion.div 
+          layout 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
           <AnimatePresence>
-            {filteredProjects.map((p, i) => (
+            {filteredProjects.map((p) => (
               <motion.div 
                 key={p.title}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                whileHover={{ y: -8 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ y: -6 }}
                 onClick={() => setSelectedProject(p)}
-                className="group relative bg-zinc-950/70 border border-white/15 hover:border-[#00FF66]/50 rounded-2xl overflow-hidden cursor-pointer shadow-2xl backdrop-blur-md transition-all duration-300"
+                className="group relative bg-black/85 border border-white/15 hover:border-[#00FF66] rounded-2xl overflow-hidden cursor-pointer shadow-xl hover:shadow-[0_15px_35px_rgba(0,255,102,0.2)] backdrop-blur-md transition-all duration-300 flex flex-col justify-between"
               >
-                <div className="h-56 overflow-hidden relative">
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent"></div>
-                </div>
-                <div className="p-6 relative z-10 -mt-16">
-                  <div className="flex gap-2 flex-wrap mb-4">
-                    {p.tech.map((t, idx) => (
-                      <span key={idx} className="px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-md border border-white/20 text-[9px] font-bold text-white uppercase tracking-wider">{t}</span>
-                    ))}
+                <div>
+                  <div className="h-52 overflow-hidden relative bg-zinc-900">
+                    <img 
+                      src={p.img} 
+                      alt={p.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+                    
+                    {/* Category pill */}
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="px-2.5 py-1 bg-black/85 backdrop-blur-md rounded-md border border-[#00FF66]/40 text-[9px] font-black text-[#00FF66] uppercase tracking-widest shadow-md">
+                        {p.category}
+                      </span>
+                    </div>
+
+                    <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="w-8 h-8 rounded-full bg-[#00FF66] text-black flex items-center justify-center shadow-lg">
+                        <ArrowUpRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#00FF66] transition-colors uppercase">{p.title}</h3>
-                  <p className="text-zinc-300 text-xs font-medium line-clamp-2 leading-relaxed">{p.desc}</p>
+
+                  <div className="p-5 relative z-10">
+                    <div className="flex gap-1.5 flex-wrap mb-3">
+                      {p.tech.map((t, idx) => (
+                        <span key={idx} className="px-2 py-0.5 bg-zinc-900/90 rounded border border-white/15 text-[9px] font-bold text-zinc-300 uppercase tracking-wider">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="text-lg font-black text-white mb-2 group-hover:text-[#00FF66] transition-colors uppercase leading-snug">
+                      {p.title}
+                    </h3>
+                    <p className="text-zinc-300 text-xs font-medium line-clamp-2 leading-relaxed">
+                      {p.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-white/10 text-xs font-bold text-[#00FF66] group-hover:translate-x-1 transition-transform">
+                  <span>View Details</span>
+                  <ArrowUpRight className="w-4 h-4" />
                 </div>
                 
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#00FF66]/40 rounded-2xl transition-colors pointer-events-none"></div>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#00FF66]/60 rounded-2xl transition-colors pointer-events-none" />
               </motion.div>
             ))}
           </AnimatePresence>
           {filteredProjects.length === 0 && (
-            <div className="col-span-full py-20 text-center text-zinc-500 font-medium">
-              No projects found matching "{searchQuery}"
+            <div className="col-span-full py-16 text-center text-zinc-400 font-medium bg-black/50 rounded-2xl border border-white/10">
+              <p className="text-lg font-bold text-white mb-2">No projects found matching your criteria</p>
+              <p className="text-sm text-zinc-400 mb-4">Try clearing your search query or selecting "All" categories.</p>
+              <button 
+                onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}
+                className="px-6 py-2.5 bg-[#00FF66] text-black font-bold text-xs uppercase tracking-wider rounded-full shadow-lg cursor-pointer"
+              >
+                Reset Filters
+              </button>
             </div>
           )}
         </motion.div>
